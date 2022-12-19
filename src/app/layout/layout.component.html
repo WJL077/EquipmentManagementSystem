@@ -1,0 +1,32 @@
+<d-layout>
+  <d-header>
+    <div class="logo">
+      <!-- <span class="logo-devui">
+        <img [src]="logoSrc" width="26px" height="26px" />
+      </span> -->
+      <span class="text" (click)="goMain()">装备管理系统</span>
+    </div>
+  </d-header>
+  <d-layout>
+    <d-aside>
+      <div class="menu-wrapper">
+        <d-accordion [data]="menu" class="menu" [linkType]="'routerLink'"></d-accordion>
+      </div>
+    </d-aside>
+    <d-content>
+      <!-- <d-breadcrumb>
+        <d-breadcrumb-item>
+          <span>DevUI</span>
+        </d-breadcrumb-item>
+        <d-breadcrumb-item>
+          <span>面包屑</span>
+        </d-breadcrumb-item>
+      </d-breadcrumb> -->
+      <div class="inner-content">
+        <!-- 离线界面 -->
+        <router-outlet></router-outlet>
+      </div>
+    </d-content>
+  </d-layout>
+<!--  <d-footer>footer</d-footer>-->
+</d-layout>

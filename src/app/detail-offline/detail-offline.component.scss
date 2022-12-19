@@ -1,0 +1,67 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+
+.card-icon {
+  cursor: pointer;
+  font-size: $devui-font-size-icon;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.card-icon+span {
+  vertical-align: middle;
+}
+
+.card-block {
+  margin-right: 16px;
+}
+
+.card-container {
+  width: 70%;
+}
+
+d-card {
+  margin-top: 30px;
+  background-color: #fff;
+}
+
+.parameter {
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  width: 100%;
+  height: 300px;
+  margin-top: 30px;
+  //margin-left: 22px;
+  float: bottom;
+}
+
+//.parameter-statistics {
+//  height: px;
+//}
+
+
+ d-button {
+  float:right;
+}
+
+h1 {
+  text-align: center;
+}
+
+.workpiece-list {
+  position:absolute;
+  top: 85px;
+  right: 30px;
+  width: 25%;
+}
+
+h1 :hover {
+  color: rgb(246, 249, 248);
+  font-size: 100px;
+}
+
+.data-curve {
+  border: 1px solid gainsboro;
+  height: 200px;
+  border-radius: 10px;
+}

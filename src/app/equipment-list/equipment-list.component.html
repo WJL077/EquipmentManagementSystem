@@ -1,0 +1,18 @@
+<ng-container>
+  <d-card class="card-container" [interactive]="true" *ngFor="let item of equipList1;let i=index"
+    routerLink="/realtime/{{item.lid}}">
+    <d-card-header>
+      <d-card-title>装备{{item.lid}}</d-card-title>
+    </d-card-header>
+    <d-card-content>
+      <d-status type="success"></d-status>
+      <p>累计开机时长：15h36min</p>
+      <p>当班时长：3h44min</p>
+      <p>当班工件数：42</p>
+      <div class="radar" style="width: 300px;height:300px;"></div>
+    </d-card-content>
+  </d-card>
+</ng-container>
+
+<!--<div class="radar" style="width: 200px;height:200px;"></div>-->
+

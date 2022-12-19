@@ -1,0 +1,127 @@
+<!--<d-range-datepicker-pro [(ngModel)]="datevalue" (ngModelChange)="onChange($event)" [format]="'y-MM-dd'"></d-range-datepicker-pro>-->
+<d-range-datepicker-pro
+  [appendToBody]="false"
+  [(ngModel)]="datevalue"
+  [showTime]="true"
+  [format]="'y-MM-dd'"
+  (confirmEvent)="onChange($event)"
+></d-range-datepicker-pro>
+<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/realtime/{{realname}}"> 实时 </d-button>
+
+
+<d-card class="card-container" [interactive]="false">
+    <d-card-header>
+        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-card-title>特征曲线</d-card-title>
+        <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
+    </d-card-header>
+    <d-card-content>
+        <d-checkbox-group [(ngModel)]="checkBoxValues1" [itemWidth]="130" [name]="'demo1'" [options]="options1"
+            [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox1Change($event)">
+        </d-checkbox-group>
+<!--        <d-checkbox-group [(ngModel)]="checkBoxValues2" [itemWidth]="120" [name]="'demo1'" [options]="options2"-->
+<!--            [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox2Change($event)">-->
+<!--        </d-checkbox-group>-->
+        <div dImagePreview style="text-align: center;margin-top: 20px;">
+            <img src="https://devui.design/components/assets/image1.png" />
+        </div>
+
+
+    </d-card-content>
+</d-card>
+
+<d-card class="card-container" [interactive]="false">
+    <d-card-header>
+        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-card-title>工艺数据曲线</d-card-title>
+        <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
+    </d-card-header>
+    <d-card-content>
+
+        <div dImagePreview style="text-align: center;margin-top: 20px;">
+            <div class="data-curve"></div>
+            <h1>粗磨1</h1>
+        </div>
+        <div dImagePreview style="text-align: center;margin-top: 20px;">
+          <div class="data-curve"></div>
+            <h1>粗磨2</h1>
+        </div>
+        <div dImagePreview style="text-align: center;margin-top: 20px;">
+          <div class="data-curve"></div>
+            <h1>精磨</h1>
+        </div>
+        <div dImagePreview style="text-align: center;margin-top: 20px;">
+          <div class="data-curve"></div>
+            <h1>光磨</h1>
+        </div>
+
+    </d-card-content>
+</d-card>
+
+
+
+<d-card class="card-container parameter-statistics" [interactive]="false">
+    <d-card-header>
+        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-card-title>质量参数统计</d-card-title>
+        <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
+    </d-card-header>
+    <d-card-content>
+
+        <div class="parameter">
+            <h1>外径尺寸</h1>
+        </div>
+
+        <div class="parameter">
+            <h1>内径尺寸</h1>
+        </div>
+
+        <div class="parameter">
+            <h1>表面粗糙度</h1>
+        </div>
+
+        <div class="parameter">
+            <h1>圆度</h1>
+        </div>
+
+        <div class="parameter">
+            <h1>波纹度</h1>
+        </div>
+
+<!--        <div class="parameter">-->
+<!--            <p>其它</p>-->
+<!--        </div>-->
+
+    </d-card-content>
+</d-card>
+
+
+<d-card class="card-container workpiece-list" [interactive]="false">
+    <!-- <d-card-header>
+        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-card-title>工件列表</d-card-title>
+    </d-card-header> -->
+    <d-card-content>
+
+        <d-data-table [dataSource]="basicDataSource"  [scrollable]="true" [tableWidthConfig]="tableWidthConfig" maxHeight="500px"
+            [tableOverflowType]="'overlay'">
+            <thead dTableHead>
+                <tr dTableRow>
+                    <th dHeadCell>#</th>
+                    <th dHeadCell>工件列表</th>
+                </tr>
+            </thead>
+            <tbody dTableBody>
+                <ng-template let-rowItem="rowItem">
+                    <tr dTableRow *ngFor="let item of workpieceList;let i=index" routerLink="/workpieceInfo/{{item.name}}">
+                        <td dTableCell>{{ i + 1 }}</td>
+                        <td dTableCell>
+                            {{item.name}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </d-data-table>
+
+    </d-card-content>
+</d-card>

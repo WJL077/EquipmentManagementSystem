@@ -1,0 +1,62 @@
+d-card {
+    margin-top: 50px;
+    background-color: #ffffff;
+    height: 500px;
+}
+
+.content-box {
+    // background-color: aquamarine;
+    width: 30%;
+    height: 400px;
+    float: left;
+    margin-left: 27px;
+    margin-top: 30px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+
+// .line {
+//     width: 0;
+//     height: 400px;
+//     background-color: gainsboro;
+// }
+
+.three {
+  height: 800px;
+}
+
+.original {
+  margin-top: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  width: 50%;
+  height: 45%;
+}
+
+.frequency-spectrum {
+  margin-top: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  width: 50%;
+  height: 45%;
+}
+
+.time-frequency {
+  border: 1px solid gainsboro;
+  position: absolute;
+  right: 30px;
+  top:60px;
+  border-radius: 10px;
+  width: 45%;
+  height: 89%;
+}

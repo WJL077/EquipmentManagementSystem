@@ -1,0 +1,61 @@
+<d-button icon="icon-go-back" bsStyle="primary" bsSize="xs" title="add" shape="circle" class="goBack"
+    (click)="goBack()"></d-button>
+
+<h1>{{workpieceName}}</h1>
+<d-card class="card-container three" [interactive]="false">
+    <!-- <d-card-header>
+        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-card-title>质量参数统计</d-card-title>
+    </d-card-header> -->
+    <d-card-content>
+
+        <d-checkbox-group [(ngModel)]="checkBoxValues1" [itemWidth]="120" [name]="'demo1'" [options]="options1"
+            [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox1Change($event)">
+        </d-checkbox-group>
+      <div class="original">
+        <h1>原始波形</h1>
+      </div>
+
+      <div class="frequency-spectrum">
+        <h1>频谱图</h1>
+      </div>
+
+      <div class="time-frequency">
+        <h1>时频图</h1>
+      </div>
+        <!-- <div style="height: 100px;background-color: aqua;"></div> -->
+
+    </d-card-content>
+</d-card>
+
+<d-card class="card-container" [interactive]="false">
+    <d-card-content>
+
+        <d-row [dGutter]="12">
+            <d-col [dSpan]="8">
+                <div class="content-box">
+                    <h1>机床状态</h1>
+                    <div id="radar" style="width: 300px;height:300px;margin: auto;"></div>
+                </div>
+            </d-col>
+            <d-col [dSpan]="8">
+                <div class="content-box">
+                    <h1>工艺参数</h1>
+                    <h2>进给量：</h2>
+                    <h2>工件轴速度：</h2>
+                    <h2>刀具轴速度：</h2>
+                </div>
+            </d-col>
+            <d-col [dSpan]="8">
+                <div class="content-box">
+                    <h1>工件质量</h1>
+                    <h2>粗糙度：</h2>
+                    <h2>波纹度：</h2>
+                    <h2>外径尺寸：</h2>
+                    <h2>内径尺寸：</h2>
+                </div>
+            </d-col>
+        </d-row>
+
+    </d-card-content>
+</d-card>
