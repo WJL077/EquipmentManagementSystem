@@ -153,6 +153,9 @@ export class DetailRealtimeComponent implements OnInit {
   onCheckhistory1Change(value:any){
     // console.log('checkHistory1 checked:',value);
     console.log(this.checkHistoryValues1)
+    this.http.post("http://localhost:8080/history",{"list":this.checkHistoryValues1}).subscribe((res:any)=>{
+      console.log(res)
+    })
   }
 
   // onCheckhistory2Change(value:any){

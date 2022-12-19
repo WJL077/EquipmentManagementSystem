@@ -39,11 +39,14 @@ import { EquipmentListComponent } from './equipment-list/equipment-list.componen
 import { WorkpieceInformationComponent } from './workpiece-information/workpiece-information.component';
 import { RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './login/login.component';
 
 
-
+//路由地址
 let routes=[
-  {path:'',component:WelcomeComponent},
+  {path:'',component:EquipmentListComponent},
+  {path:'login',component:LoginComponent},
+  {path:'index',component:LayoutComponent},
   {path:'list/:ListID',component:EquipmentListComponent},
   {path:'realtime/:EquipmentID',component:DetailRealtimeComponent},
   {path:'offline/:EquipmentID',component:DetailOfflineComponent},
@@ -59,6 +62,7 @@ let routes=[
     EquipmentListComponent,
     WorkpieceInformationComponent,
     WelcomeComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

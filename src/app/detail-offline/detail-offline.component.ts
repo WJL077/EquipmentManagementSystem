@@ -107,12 +107,14 @@ export class DetailOfflineComponent implements OnInit {
   // 时间范围
   datevalue=[];
   // 时间范围
+  pad2(n:any) { return n < 10 ? '0' + n : n }
   onChange(dateList:any) {
-    var start=new Date(this.datevalue[0]).toLocaleDateString()
-    var end=new Date(this.datevalue[1]).toLocaleDateString()
+    var start=new Date(this.datevalue[0])
+    var end=new Date(this.datevalue[1])
+    //yyyymmddhhmmss格式时间戳
     var dateJSON={
-      "start":start,
-      "end":end,
+      "start":Number(start.getFullYear().toString() + this.pad2(start.getMonth() + 1) + this.pad2(start.getDate()) + this.pad2(start.getHours()) + this.pad2(start.getMinutes()) + this.pad2(start.getSeconds())),
+      "end":Number(end.getFullYear().toString() + this.pad2(end.getMonth() + 1) + this.pad2(end.getDate()) + this.pad2(end.getHours()) + this.pad2(end.getMinutes()) + this.pad2(end.getSeconds())),
     }
     console.log(typeof this.datevalue[0]);
     this.http.post("http://localhost:8080/DATE",dateJSON).subscribe((res)=>{
