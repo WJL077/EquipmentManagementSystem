@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
+import * as echart from "echarts";
 
 @Component({
   selector: 'app-detail-realtime',
@@ -46,12 +47,76 @@ export class DetailRealtimeComponent implements OnInit {
   ];
 
   onCheckbox1Change(value:any){
-    // console.log('checkbox1 checked:',value);
-    // console.log(JSON.stringify(this.checkBoxValues1))//被选中数组
+    console.log(this.checkBoxValues1)
 
-    // this.http.post("http://localhost:8080/hello",value).subscribe((res:any)=>{
-    //   console.log(res)
-    // })
+    //原始波形
+    var chart1=document.getElementsByClassName("OriginalWaveform")
+    var LineChart1=echart.init(chart1[0] as HTMLDivElement)
+    var option = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line'
+        }
+      ]
+    };
+    LineChart1.setOption(option)
+
+
+    //频谱图
+    var chart2=document.getElementsByClassName("Spectrogram")
+    var LineChart2=echart.init(chart2[0] as HTMLDivElement)
+    var option2 = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line'
+        }
+      ]
+    };
+    LineChart2.setOption(option2)
+
+    //时频图
+    var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
+    var LineChart3=echart.init(chart3[0] as HTMLDivElement)
+    var option3 = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line'
+        }
+      ]
+    };
+    LineChart3.setOption(option3)
+
+
+
+    this.http.post("",value).subscribe((res:any)=>{
+      console.log(res)
+
+
+    })
   }
 
 

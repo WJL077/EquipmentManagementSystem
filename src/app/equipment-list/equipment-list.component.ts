@@ -67,11 +67,13 @@ export class EquipmentListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: any) => {
       console.log(data);
+      //装备列表
       var api = 'https://www.codeboy.com/xuezi/data/product/list.php?pno=' + data.ListID
       this.http.get(api).subscribe((res: any) => {
         this.equipList1 = res.data;
         console.log(res);
 
+        //雷达图
         this.http.get("http://localhost:8080/radar").subscribe((res:any)=>{
           console.log(res)
           var chart=document.getElementsByClassName('radar')
@@ -84,10 +86,10 @@ export class EquipmentListComponent implements OnInit {
               radar: {
                 // shape: 'circle',
                 indicator: [
-                  { name: '前震', max: 6500 },
-                  { name: '后震', max: 16000 },
-                  { name: '温度', max: 30000 },
-                  { name: '湿度', max: 38000 },
+                  { name: '前振', max: 6500 },
+                  { name: '后振', max: 16000 },
+                  { name: '前温', max: 30000 },
+                  { name: '后温', max: 38000 },
                 ]
               },
               series: [
@@ -95,18 +97,11 @@ export class EquipmentListComponent implements OnInit {
                   name: 'Budget vs spending',
                   type: 'radar',
                   data: [res.data]
-                  //   [
-                  //   {
-                  //     value: [4200, 3000, 20000, 35000],
-                  //     // name: 'Allocated Budget'
-                  //   },
-                  // ]
                 }
               ]
             };
             radarChart.setOption(option)
           }
-
         })
       })
     })

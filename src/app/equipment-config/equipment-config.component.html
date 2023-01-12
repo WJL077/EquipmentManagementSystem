@@ -1,0 +1,92 @@
+<d-button (click)="getRemoteData()" style="margin-right: 5px">刷新</d-button>
+<d-button  style="margin-right: 5px" (click)="openStandardDialog('standard')"> 添加 </d-button>
+<br />
+<br />
+<d-data-table
+  dLoading
+  [dataSource]="remoteDataSource"
+  [tableOverflowType]="'overlay'"
+  [backdrop]="true"
+  [scrollable]="true"
+  [showLoading]="showLoading"
+  [striped]="true"
+  [shadowType]="'normal'"
+  [headerBg]="false"
+>
+  <thead dTableHead>
+  <tr dTableRow>
+<!--    <th dHeadCell *ngFor="let colOption of colDataOptions">-->
+<!--      {{ colOption.header }}-->
+<!--    </th>-->
+    <th dHeadCell>#</th>
+    <th dHeadCell>设备名称</th>
+    <th dHeadCell>IP地址</th>
+    <th dHeadCell>归属生产线</th>
+    <th dHeadCell>操作</th>
+  </tr>
+  </thead>
+  <tbody dTableBody>
+  <ng-template let-rowItem="rowItem">
+    <tr dTableRow *ngFor="let item of deviceList;let i=index">
+<!--      <td dTableCell *ngFor="let colOption of colDataOptions">-->
+<!--        {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}-->
+<!--      </td>-->
+      <td dTableCell>{{ i + 1 }}</td>
+<!--      <td-->
+<!--        dTableCell [editable]="true">{{item.deviceName}}</td>-->
+<!--      <td dTableCell>{{item.ip}}</td>-->
+
+
+      <td dTableCell [editable]="isEditable" [(editing)]="item['nameEdit']">
+        <span *ngIf="!item['nameEdit']">{{item.deviceName}}</span>
+        <div *ngIf="item['nameEdit']" class="edit-padding-fix">
+          <input
+            class="devui-form-control"
+            autofocus
+            name="lastname"
+            [(ngModel)]="item.deviceName"
+            [attr.maxlength]="100"
+            [attr.minlength]="3"
+          />
+        </div>
+      </td>
+
+<!--      <td dTableCell>{{item.ip}}</td>-->
+      <td dTableCell [editable]="isEditable" [(editing)]="item['ipEdit']">
+        <span *ngIf="!item['ipEdit']">{{item.ip}}</span>
+        <div *ngIf="item['ipEdit']" class="edit-padding-fix">
+          <input
+            class="devui-form-control"
+            autofocus
+            name="lastname"
+            [(ngModel)]="item.ip"
+            [attr.maxlength]="100"
+            [attr.minlength]="3"
+          />
+        </div>
+      </td>
+
+      <td dTableCell>
+        <d-select
+          placeholder="{{item.productionLine}}"
+          [appendToBody]="true"
+          [appendToBodyDirections]="['leftDown', 'leftUp']"
+          [options]="productionLineOptions"
+          [allowClear]="true"
+          [disabled]="!isEditable"
+        >
+        </d-select>
+      </td>
+      <td>
+        <d-button style="margin-right: 5px" (click)="alter()">修改</d-button>
+        <d-button style="margin-right: 5px" (click)="save()">保存</d-button>
+        <d-button style="margin-right: 5px" (click)="openDialog('warning')">删除</d-button>
+      </td>
+
+    </tr>
+  </ng-template>
+  </tbody>
+  <ng-template #noResultTemplateRef>
+    <div style="text-align: center; margin-top: 20px">No Data</div>
+  </ng-template>
+</d-data-table>

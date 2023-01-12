@@ -10,9 +10,23 @@ export interface SourceType {
     children?: any;
     chosen?: boolean;
     $isChildTableOpen?: boolean;
+    deviceName:String;
+    ipAddress:String;
+    productionLine:String;
+
   }
-  
+
   export const originSource = [
+    {
+      deviceName:"String",
+      ipAddress:"String",
+      productionLine:"String",
+    },
+
+
+
+
+
     {
       id: 1,
       firstName: 'Mark',
@@ -106,7 +120,7 @@ export interface SourceType {
       dob: new Date(1991, 3, 1),
     },
   ];
-  
+
   export const editableOriginSource = [
     {
       id: 1,
@@ -337,19 +351,19 @@ export interface SourceType {
       }]
     },
   ];
-  
+
   export const genderSource = [
     { id: 1, label: 'Male' },
     { id: 2, label: 'Female' }
   ];
-  
+
   export const hobbySource = [
     { id: 1, name: 'music' },
     { id: 2, name: 'football' },
     { id: 3, name: 'game' },
     { id: 4, name: 'anime' }
   ];
-  
+
   export const DutySource = [
     {
       'id': 8,
@@ -388,7 +402,7 @@ export interface SourceType {
         ]
     }
   ];
-  
+
   export const treeDataSource = [
     {
       title: 'table title0',
@@ -475,4 +489,3 @@ export interface SourceType {
       endDate: new Date(2020, 1, 12),
     }
   ];
-  

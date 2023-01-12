@@ -1,0 +1,51 @@
+<div class="modal-cases-component">
+  <form dForm [layout]="layoutDirection" ngForm>
+    <d-form-item>
+      <d-form-label [required]="true">设备名称</d-form-label>
+      <d-form-control>
+        <div>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="branch"
+            placeholder="请输入设备名称"
+            [(ngModel)]="name"
+            (ngModelChange)="formChange()"
+          />
+        </div>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">IP地址</d-form-label>
+      <d-form-control>
+        <div>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="IP"
+            placeholder="请填写IP地址"
+            maxlength="200"
+            [(ngModel)]="IP"
+            (ngModelChange)="formChange()"
+          />
+        </div>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">归属生产线</d-form-label>
+      <d-form-control>
+        <d-select
+          placeholder="请选择生产线"
+          name="productionLine"
+          [appendToBody]="true"
+          [appendToBodyDirections]="['leftDown', 'leftUp']"
+          [options]="productionLineOptions"
+          [allowClear]="true"
+          [(ngModel)]="line"
+        >
+        </d-select>
+      </d-form-control>
+    </d-form-item>
+  </form>
+</div>
+

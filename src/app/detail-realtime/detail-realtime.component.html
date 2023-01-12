@@ -18,14 +18,17 @@
 
       <div class="original">
         <h1>原始波形</h1>
+        <div class="OriginalWaveform" style="width:90%;height:80%;"></div>
       </div>
 
       <div class="frequency-spectrum">
         <h1>频谱图</h1>
+        <div class="Spectrogram" style="width:90%;height:80%;"></div>
       </div>
 
       <div class="time-frequency">
         <h1>时频图</h1>
+        <div class="TimeFrequencyDiagram" style="width: 90%;height:80%;"></div>
       </div>
 
 
@@ -38,7 +41,7 @@
     <h1>统计信息</h1>
     <d-card class="statistic" *ngFor="let item of options2" [interactive]="false">
         <d-card-header>
-            <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+            <d-avatar dCardAvatar [name]="'统'"></d-avatar>
             <d-card-title>{{item}}</d-card-title>
             <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
         </d-card-header>
@@ -52,7 +55,7 @@
 
 <d-card class="history-curve" [interactive]="false">
     <d-card-header>
-        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>
+        <d-avatar dCardAvatar [name]="'历'"></d-avatar>
         <d-card-title>历史曲线</d-card-title>
         <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>

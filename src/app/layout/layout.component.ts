@@ -39,12 +39,20 @@ export class LayoutComponent implements OnInit {
     { title: '生产线12', link: '/list/12' },
   ]
 
-  menu = [{
-    title: '生产线列表',
-    children: [
-      { title: '', link: '' },
-    ]
-  },];
+  menu = [
+    {
+      title: '生产线列表',
+      children: [
+        { title: '', link: '' },
+      ]
+    },
+    {
+      title: '配置',
+      children: [
+        { title: '装备配置', link: '/config/equipment' },
+      ]
+    }
+  ];
 
 
 
