@@ -113,10 +113,10 @@
             </thead>
             <tbody dTableBody>
                 <ng-template let-rowItem="rowItem">
-                    <tr dTableRow *ngFor="let item of workpieceList;let i=index" routerLink="/workpieceInfo/{{item.name}}">
+                    <tr dTableRow *ngFor="let item of workpieceList;let i=index" routerLink="/workpieceInfo/{{item}}">
                         <td dTableCell>{{ i + 1 }}</td>
                         <td dTableCell>
-                            {{item.name}}
+                            {{item}}
                         </td>
                     </tr>
                 </ng-template>

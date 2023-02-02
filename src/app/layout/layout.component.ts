@@ -51,6 +51,13 @@ export class LayoutComponent implements OnInit {
       children: [
         { title: '装备配置', link: '/config/equipment' },
       ]
+    },
+    {
+      title: '数据分析',
+      children: [
+        {title: '数据诊断',link: '/data/diagnose'},
+
+      ]
     }
   ];
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import * as echart from "echarts";
+import * as http from "http";
 
 @Component({
   selector: 'app-detail-realtime',
@@ -14,11 +15,91 @@ export class DetailRealtimeComponent implements OnInit {
 
   }
 
+
+  R1=[111,222,444]
+  R2=[111,222,444]
+  R3=[111,222,444]
+  R4=[111,222,444]
+  R5=[111,222,444]
+  R6=[111,222,444]
+  R7=[111,222,444]
+  R8=[111,222,444]
+  R9=[111,222,444]
+  R10=[111,222,444]
+  R11=[111,222,444]
+  R12=[111,222,444]
+  R13=[111,222,444]
+  R14=[111,222,444]
+  R15=[111,222,444]
+
   ngOnInit(): void {
     // console.log(window.location.pathname.substring(10))
     this.route.params.subscribe((data:any)=>{
-      console.log(data)
+
+      //初始化加载统计信息
+      this.http.get("/api/realtime/"+data.EquipmentID+"/前轴承加速度X统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R1=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/前轴承加速度Y统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R2=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/前轴承加速度Z统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R3=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/后轴承加速度X统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R4=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/后轴承加速度Y统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R5=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/后轴承加速度Z统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R6=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/位移X统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R7=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/位移Y统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R8=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/支座X统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R9=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/支座Y统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R10=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/支座Z统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R11=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/红外1温度统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R12=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/红外2温度统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R13=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/接触1温度统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R14=res.data
+      })
+      this.http.get("/api/realtime/"+data.EquipmentID+"/接触2温度统计特征").subscribe((res:any)=>{
+        console.log(res)
+        this.R15=res.data
+      })
+
     })
+
 
   }
 
@@ -49,66 +130,72 @@ export class DetailRealtimeComponent implements OnInit {
   onCheckbox1Change(value:any){
     console.log(this.checkBoxValues1)
 
-    //原始波形
-    var chart1=document.getElementsByClassName("OriginalWaveform")
-    var LineChart1=echart.init(chart1[0] as HTMLDivElement)
-    var option = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
-        }
-      ]
-    };
-    LineChart1.setOption(option)
+    this.http.get("/api/realtime/234/前轴承加速度X").subscribe((res:any)=>{
+
+      console.log(res.data)
+      // //原始波形
+      // var chart1=document.getElementsByClassName("OriginalWaveform")
+      // var LineChart1=echart.init(chart1[0] as HTMLDivElement)
+      // var option = {
+      //   xAxis: {
+      //     type: 'category',
+      //     data: [1,2,3,4,5,6,7,8,9]
+      //   },
+      //   yAxis: {
+      //     type: 'value'
+      //   },
+      //   series: [
+      //     {
+      //       data: [res.data],
+      //       type: 'line'
+      //     }
+      //   ]
+      // };
+      // LineChart1.setOption(option)
+    })
 
 
-    //频谱图
-    var chart2=document.getElementsByClassName("Spectrogram")
-    var LineChart2=echart.init(chart2[0] as HTMLDivElement)
-    var option2 = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
-        }
-      ]
-    };
-    LineChart2.setOption(option2)
 
-    //时频图
-    var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
-    var LineChart3=echart.init(chart3[0] as HTMLDivElement)
-    var option3 = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
-        }
-      ]
-    };
-    LineChart3.setOption(option3)
+
+    // //频谱图
+    // var chart2=document.getElementsByClassName("Spectrogram")
+    // var LineChart2=echart.init(chart2[0] as HTMLDivElement)
+    // var option2 = {
+    //   xAxis: {
+    //     type: 'category',
+    //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    //   },
+    //   yAxis: {
+    //     type: 'value'
+    //   },
+    //   series: [
+    //     {
+    //       data: [150, 230, 224, 218, 135, 147, 260],
+    //       type: 'line'
+    //     }
+    //   ]
+    // };
+    // LineChart2.setOption(option2)
+    //
+    // //时频图
+    // var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
+    // var LineChart3=echart.init(chart3[0] as HTMLDivElement)
+    // var option3 = {
+    //   xAxis: {
+    //     type: 'category',
+    //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    //   },
+    //   yAxis: {
+    //     type: 'value'
+    //   },
+    //   series: [
+    //     {
+    //       data: [150, 230, 224, 218, 135, 147, 260],
+    //       type: 'line'
+    //     }
+    //   ]
+    // };
+    // LineChart3.setOption(option3)
 
 
 
@@ -217,10 +304,10 @@ export class DetailRealtimeComponent implements OnInit {
 
   onCheckhistory1Change(value:any){
     // console.log('checkHistory1 checked:',value);
-    console.log(this.checkHistoryValues1)
-    this.http.post("http://localhost:8080/history",{"list":this.checkHistoryValues1}).subscribe((res:any)=>{
-      console.log(res)
-    })
+    // console.log(this.checkHistoryValues1)
+    // this.http.post("http://localhost:8080/history",{"list":this.checkHistoryValues1}).subscribe((res:any)=>{
+    //   console.log(res)
+    // })
   }
 
   // onCheckhistory2Change(value:any){

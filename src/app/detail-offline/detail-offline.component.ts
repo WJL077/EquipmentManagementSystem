@@ -98,6 +98,9 @@ export class DetailOfflineComponent implements OnInit {
 
   constructor(private http:HttpClient,private route:ActivatedRoute) { }
 
+  //工件列表
+  workpieceList=[
+  ]
   ngOnInit(): void {
     this.route.params.subscribe((data:any)=>{
       console.log(data)
@@ -120,6 +123,10 @@ export class DetailOfflineComponent implements OnInit {
     this.http.post("http://localhost:8080/DATE",dateJSON).subscribe((res)=>{
       console.log(res)
     })
+    this.http.get("/api/history/234/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
+      this.workpieceList=res.data
+      console.log(this.workpieceList)
+    })
   }
 
   checkBoxValues1 = [];
@@ -133,21 +140,5 @@ export class DetailOfflineComponent implements OnInit {
   //   console.log(this.checkBoxValues2);
   // }
 
-  workpieceList=[
-    {'name':'工件1'},
-    {'name':'工件2'},
-    {'name':'工件3'},
-    {'name':'工件4'},
-    {'name':'工件5'},
-    {'name':'工件6'},
-    {'name':'工件7'},
-    {'name':'工件8'},
-    {'name':'工件9'},
-    {'name':'工件10'},
-    {'name':'工件11'},
-    {'name':'工件12'},
-    {'name':'工件13'},
-    {'name':'工件14'},
-    {'name':'工件15'},
-  ]
+
 }

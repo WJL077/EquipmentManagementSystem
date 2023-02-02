@@ -1,8 +1,8 @@
 <ng-container>
   <d-card class="card-container" [interactive]="true" *ngFor="let item of equipList1;let i=index"
-    routerLink="/realtime/{{item.lid}}">
+    routerLink="/realtime/{{item.name}}">
     <d-card-header>
-      <d-card-title>装备{{item.lid}}</d-card-title>
+      <d-card-title>装备{{item.name}}</d-card-title>
     </d-card-header>
     <d-card-content>
       <d-status type="success"></d-status>

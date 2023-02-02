@@ -42,6 +42,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { EquipmentConfigComponent } from './equipment-config/equipment-config.component';
 import { AddServiceComponent } from './add-service/add-service.component';
+import { DataDiagnoseComponent } from './data-diagnose/data-diagnose.component';
 
 
 //路由地址
@@ -53,7 +54,8 @@ let routes=[
   {path:'realtime/:EquipmentID',component:DetailRealtimeComponent},
   {path:'offline/:EquipmentID',component:DetailOfflineComponent},
   {path:'workpieceInfo/:WorkpieceID',component:WorkpieceInformationComponent},
-  {path:'config/equipment',component: EquipmentConfigComponent}
+  {path:'config/equipment',component: EquipmentConfigComponent},
+  {path:'data/diagnose',component: DataDiagnoseComponent}
 ]
 
 @NgModule({
@@ -68,6 +70,7 @@ let routes=[
     LoginComponent,
     EquipmentConfigComponent,
     AddServiceComponent,
+    DataDiagnoseComponent,
   ],
   imports: [
     BrowserModule,
