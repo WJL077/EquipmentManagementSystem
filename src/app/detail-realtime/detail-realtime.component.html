@@ -1,55 +1,54 @@
 <!-- <d-button icon="icon-go-back" bsStyle="primary" bsSize="xs" title="add" shape="circle" class="goBack"
     routerLink="/list" (click)="goBack()"></d-button> -->
 
-<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/offline/{{offname}}" class="history"> 历史 </d-button>
+<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/offline/{{offname}}" class="history"> 历史</d-button>
 
 
 <d-card class="card-container three" [interactive]="false">
-<!--    <d-card-header>-->
-<!--        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>-->
-<!--        <d-card-title>质量参数统计</d-card-title>-->
-<!--        &lt;!&ndash; <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> &ndash;&gt;-->
-<!--    </d-card-header>-->
-    <d-card-content>
+  <!--    <d-card-header>-->
+  <!--        <d-avatar dCardAvatar [name]="'characteristic'"></d-avatar>-->
+  <!--        <d-card-title>质量参数统计</d-card-title>-->
+  <!--        &lt;!&ndash; <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> &ndash;&gt;-->
+  <!--    </d-card-header>-->
+  <d-card-content>
 
-        <d-checkbox-group [(ngModel)]="checkBoxValues1" [itemWidth]="120" [name]="'demo1'" [options]="options1"
-            [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox1Change($event)">
-        </d-checkbox-group>
+    <d-checkbox-group [(ngModel)]="checkBoxValues1" [itemWidth]="120" [name]="'demo1'" [options]="options1"
+                      [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox1Change($event)">
+    </d-checkbox-group>
 
-      <div class="original">
-        <h1>原始波形</h1>
-        <div class="OriginalWaveform" style="width:90%;height:80%;"></div>
-      </div>
+    <div class="original">
+      <h1>原始波形</h1>
+      <div class="OriginalWaveform" style="width:90%;height:80%;"></div>
+    </div>
 
-      <div class="frequency-spectrum">
-        <h1>频谱图</h1>
-        <div class="Spectrogram" style="width:90%;height:80%;"></div>
-      </div>
+    <div class="frequency-spectrum">
+      <h1>频谱图</h1>
+      <div class="Spectrogram" style="width:90%;height:80%;"></div>
+    </div>
 
-      <div class="time-frequency">
-        <h1>时频图</h1>
-        <div class="TimeFrequencyDiagram" style="width: 90%;height:80%;"></div>
-      </div>
+    <div class="time-frequency">
+      <h1>时频图</h1>
+      <div class="TimeFrequencyDiagram" style="width: 90%;height:80%;"></div>
+    </div>
 
 
-
-    </d-card-content>
+  </d-card-content>
 </d-card>
 
 
 <div class="statistics" style="display: block">
-    <h1>统计信息</h1>
-    <d-card class="statistic" [interactive]="false" [(ngModel)]="R1" ngDefaultControl>
-        <d-card-header>
-            <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-            <d-card-title>前轴承加速度X</d-card-title>
-            <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
-        </d-card-header>
-        <p>峰值：{{R1[0]}}</p>
-        <p>峭度：{{R1[1]}}</p>
-        <p>方差：{{R1[2]}}</p>
-        <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
-    </d-card>
+  <h1>统计信息</h1>
+  <d-card class="statistic" [interactive]="false" [(ngModel)]="R1" ngDefaultControl>
+    <d-card-header>
+      <d-avatar dCardAvatar [name]="'统'"></d-avatar>
+      <d-card-title>前轴承加速度X</d-card-title>
+      <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
+    </d-card-header>
+    <p>峰值：{{R1[0]}}</p>
+    <p>峭度：{{R1[1]}}</p>
+    <p>方差：{{R1[2]}}</p>
+    <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
+  </d-card>
 
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R2" ngDefaultControl>
     <d-card-header>
@@ -221,22 +220,22 @@
 </div>
 
 <d-card class="history-curve" [interactive]="false">
-    <d-card-header>
-        <d-avatar dCardAvatar [name]="'历'"></d-avatar>
-        <d-card-title>历史曲线</d-card-title>
-        <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
-    </d-card-header>
-    <d-card-content>
-        <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="130" [name]="'demo1'" [options]="historyChecked1"
-            [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory1Change($event)">
-        </d-checkbox-group>
-        <!-- <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked2"
-            [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory2Change($event)">
-        </d-checkbox-group>
-        <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked3"
-            [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory3Change($event)">
-        </d-checkbox-group> -->
+  <d-card-header>
+    <d-avatar dCardAvatar [name]="'历'"></d-avatar>
+    <d-card-title>历史曲线</d-card-title>
+    <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
+  </d-card-header>
+  <d-card-content>
+    <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="130" [name]="'demo1'" [options]="historyChecked1"
+                      [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory1Change($event)">
+    </d-checkbox-group>
+    <!-- <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked2"
+        [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory2Change($event)">
+    </d-checkbox-group>
+    <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked3"
+        [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory3Change($event)">
+    </d-checkbox-group> -->
 
 
-    </d-card-content>
+  </d-card-content>
 </d-card>

@@ -1,3 +1,49 @@
-<div class="col-md-5">
-  <d-select [placeholder]="'Standard Input'" [options]="options" [(ngModel)]="dataItem" (valueChange)="dataItemChange()"></d-select>
+<div class="data-select" [(ngModel)]="dataItemJSON" ngDefaultControl>
+  <div class="col-md-5">
+    <d-select
+      [customViewDirection]="'left'"
+      [width]="200"
+      [appendToBody]="true"
+      [appendToBodyDirections]="['leftDown', 'leftUp']"
+      [placeholder]="'请选择需要离线诊断的数据项'"
+      [options]="options"
+      [(ngModel)]="dataItem"
+      (valueChange)="dataItemChange()"></d-select>
+    <d-button bsStyle="primary" style="margin-top: 10px" (click)="diagnode()"> 离线诊断</d-button>
+  </div>
+
+  <div class="img1" dLoading [showLoading]="showLoading">
+    <h1>诊断准确率:{{dataItemJSON.rate}}</h1>
+    <div class="confusion-matrix" style="display: table-cell;padding: 20px">
+      <h2>混淆矩阵</h2>
+      <img src="{{dataItemJSON.confusionIMG}}" width="90%">
+    </div>
+
+    <div class="t-sne" style="display: table-cell;padding: 20px">
+      <h2>T-SNE结果</h2>
+      <img src="{{dataItemJSON.tsneIMG}}" width="90%">
+    </div>
+
+  </div>
+
+  <div class="img2" dLoading [showLoading]="showLoading">
+    <div style="display: table-cell;padding: 20px;width: 30%">
+      <h2>样本信息</h2>
+      <h3>测试集总样本数：31500</h3>
+      <h3>Ball样本数：7875</h3>
+      <h3>Inner样本数：7875</h3>
+      <h3>Outer样本数：7875</h3>
+      <h3>Normal样本数：7875</h3>
+    </div>
+    <div style="display: table-cell;padding: 20px">
+      <h2>模型图</h2>
+      <img src="{{dataItemJSON.modelIMG}}" width="90%">
+    </div>
+
+  </div>
+
 </div>
+
+
+
+
