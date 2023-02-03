@@ -1,11 +1,19 @@
-import { AfterContentInit,ElementRef,HostBinding,ViewChild,ChangeDetectorRef ,Component, OnInit } from '@angular/core';
-import { LoadingType } from 'ng-devui/loading';
-import { TableWidthConfig } from 'ng-devui/data-table';
-import { Observable, timer } from 'rxjs';
-import { originSource, SourceType } from '../shared/mock-data';
-import { DialogService } from 'ng-devui/modal';
+import {
+  AfterContentInit,
+  ElementRef,
+  HostBinding,
+  ViewChild,
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
+import {LoadingType} from 'ng-devui/loading';
+import {TableWidthConfig} from 'ng-devui/data-table';
+import {Observable, timer} from 'rxjs';
+import {originSource, SourceType} from '../shared/mock-data';
+import {DialogService} from 'ng-devui/modal';
 import {AddServiceComponent} from "../add-service/add-service.component";
-import { EditableTip } from 'ng-devui/data-table';
+import {EditableTip} from 'ng-devui/data-table';
 
 @Component({
   selector: 'app-equipment-config',
@@ -14,21 +22,34 @@ import { EditableTip } from 'ng-devui/data-table';
 })
 export class EquipmentConfigComponent implements OnInit {
 
+  // value1;
+  //
+  // test(value) {
+  //   this.value1 = value
+  // }
+
   editableTip = EditableTip.hover;
 
-  isEditable=false;
+  isEditable = [false,false,false,false];
 
   //修改
-  alter(){
-    this.isEditable=true;
+  alter(i) {
+    console.log(i)
+    this.isEditable[i] = true;
   }
-  //保存
-  save(){
-    this.isEditable=false
-  }
-  //删除
-  delete(){
 
+
+  //保存
+  save(i,item) {
+    this.isEditable[i] = false
+    console.log(item)
+  }
+
+
+  deleteName=''
+  //删除
+  delete(deviceName) {
+    this.deleteName=deviceName
   }
 
   remoteDataSource: Array<SourceType> = [];
@@ -65,9 +86,9 @@ export class EquipmentConfigComponent implements OnInit {
 
   // colDataOptions = this.columns.slice(0, 3);
 
-  constructor(private changeDetectorRef: ChangeDetectorRef,private dialogService:DialogService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private dialogService: DialogService) {
     this.loading = new Observable(
-      function (observer:any) {
+      function (observer: any) {
         if (this.complete) {
           observer.onNext(this.complete);
           observer.onCompleted();
@@ -76,6 +97,7 @@ export class EquipmentConfigComponent implements OnInit {
     );
   }
 
+  //添加设备
   openStandardDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       id: 'dialog-service',
@@ -94,7 +116,7 @@ export class EquipmentConfigComponent implements OnInit {
           text: '确定',
           disabled: true,
           handler: ($event: Event) => {
-            console.log("输入：",results.modalContentInstance);
+            console.log("输入：", results.modalContentInstance);
             results.modalInstance.hide();
           },
         },
@@ -115,6 +137,7 @@ export class EquipmentConfigComponent implements OnInit {
     });
     // console.log("结果：",results.modalContentInstance);
   }
+
   config = {
     id: 'dialog-service',
     width: '346px',
@@ -123,6 +146,7 @@ export class EquipmentConfigComponent implements OnInit {
     backdropCloseable: true,
     html: true,
   };
+
   openDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       ...this.config,
@@ -134,6 +158,7 @@ export class EquipmentConfigComponent implements OnInit {
           text: '确认',
           handler: ($event: Event) => {
             results.modalInstance.hide();
+            alert("成功删除"+this.deleteName)
           },
         },
         {
@@ -149,34 +174,40 @@ export class EquipmentConfigComponent implements OnInit {
 
   deviceList = [
     {
-      deviceName:'装备1',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备1',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
     {
-      deviceName:'装备2',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备2',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
     {
-      deviceName:'装备1',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备3',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
     {
-      deviceName:'装备2',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备4',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
     {
-      deviceName:'装备1',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备5',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
     {
-      deviceName:'装备2',
-      ip:'192.168.1.1',
-      productionLine:'生产线1'
+      deviceName: '装备6',
+      ip1: '192.168.1.1',
+      ip2: '',
+      productionLine: '生产线1'
     },
 
   ];
@@ -202,8 +233,8 @@ export class EquipmentConfigComponent implements OnInit {
   //   this.colChanged = !this.colChanged;
   // }
 
-  productionLineOptions=[
-    '生产线1','生产线2','生产线3','生产线4','生产线5','生产线6','生产线7','生产线8','生产线9','生产线10','生产线11','生产线12'
+  productionLineOptions = [
+    '生产线1', '生产线2', '生产线3', '生产线4', '生产线5', '生产线6', '生产线7', '生产线8', '生产线9', '生产线10', '生产线11', '生产线12'
   ]
 
   ngOnInit() {

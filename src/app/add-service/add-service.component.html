@@ -16,16 +16,32 @@
       </d-form-control>
     </d-form-item>
     <d-form-item>
-      <d-form-label [required]="true">IP地址</d-form-label>
+      <d-form-label [required]="true">IP地址1</d-form-label>
       <d-form-control>
         <div>
           <input
             dTextInput
             autocomplete="off"
             name="IP"
-            placeholder="请填写IP地址"
+            placeholder="请填写IP地址1"
             maxlength="200"
-            [(ngModel)]="IP"
+            [(ngModel)]="IP1"
+            (ngModelChange)="formChange()"
+          />
+        </div>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">IP地址2</d-form-label>
+      <d-form-control>
+        <div>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="IP"
+            placeholder="请填写IP地址2"
+            maxlength="200"
+            [(ngModel)]="IP2"
             (ngModelChange)="formChange()"
           />
         </div>

@@ -20,13 +20,14 @@
 <!--    </th>-->
     <th dHeadCell>#</th>
     <th dHeadCell>设备名称</th>
-    <th dHeadCell>IP地址</th>
+    <th dHeadCell>IP地址1</th>
+    <th dHeadCell>IP地址2</th>
     <th dHeadCell>归属生产线</th>
     <th dHeadCell>操作</th>
   </tr>
   </thead>
   <tbody dTableBody>
-  <ng-template let-rowItem="rowItem">
+  <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
     <tr dTableRow *ngFor="let item of deviceList;let i=index">
 <!--      <td dTableCell *ngFor="let colOption of colDataOptions">-->
 <!--        {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}-->
@@ -37,7 +38,7 @@
 <!--      <td dTableCell>{{item.ip}}</td>-->
 
 
-      <td dTableCell [editable]="isEditable" [(editing)]="item['nameEdit']">
+      <td dTableCell [editable]="isEditable[i]" [(editing)]="item['nameEdit']">
         <span *ngIf="!item['nameEdit']">{{item.deviceName}}</span>
         <div *ngIf="item['nameEdit']" class="edit-padding-fix">
           <input
@@ -52,14 +53,28 @@
       </td>
 
 <!--      <td dTableCell>{{item.ip}}</td>-->
-      <td dTableCell [editable]="isEditable" [(editing)]="item['ipEdit']">
-        <span *ngIf="!item['ipEdit']">{{item.ip}}</span>
-        <div *ngIf="item['ipEdit']" class="edit-padding-fix">
+      <td dTableCell [editable]="isEditable[i]" [(editing)]="item['ip1Edit']">
+        <span *ngIf="!item['ip1Edit']">{{item.ip1}}</span>
+        <div *ngIf="item['ip1Edit']" class="edit-padding-fix">
           <input
             class="devui-form-control"
             autofocus
             name="lastname"
-            [(ngModel)]="item.ip"
+            [(ngModel)]="item.ip1"
+            [attr.maxlength]="100"
+            [attr.minlength]="3"
+          />
+        </div>
+      </td>
+
+      <td dTableCell [editable]="isEditable[i]" [(editing)]="item['ip2Edit']">
+        <span *ngIf="!item['ip2Edit']">{{item.ip2}}</span>
+        <div *ngIf="item['ip2Edit']" class="edit-padding-fix">
+          <input
+            class="devui-form-control"
+            autofocus
+            name="lastname"
+            [(ngModel)]="item.ip2"
             [attr.maxlength]="100"
             [attr.minlength]="3"
           />
@@ -69,18 +84,19 @@
       <td dTableCell>
         <d-select
           placeholder="{{item.productionLine}}"
+          [(ngModel)]="item.productionLine"
           [appendToBody]="true"
           [appendToBodyDirections]="['leftDown', 'leftUp']"
           [options]="productionLineOptions"
           [allowClear]="true"
-          [disabled]="!isEditable"
+          [disabled]="!isEditable[i]"
         >
         </d-select>
       </td>
       <td>
-        <d-button style="margin-right: 5px" (click)="alter()">修改</d-button>
-        <d-button style="margin-right: 5px" (click)="save()">保存</d-button>
-        <d-button style="margin-right: 5px" (click)="openDialog('warning')">删除</d-button>
+        <d-button style="margin-right: 5px" (click)="alter(i)">修改</d-button>
+        <d-button style="margin-right: 5px" (click)="save(i,item)">保存</d-button>
+        <d-button style="margin-right: 5px" (click)="openDialog('warning');delete(item.deviceName)">删除</d-button>
       </td>
 
     </tr>
