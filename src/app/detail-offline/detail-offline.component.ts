@@ -101,9 +101,12 @@ export class DetailOfflineComponent implements OnInit {
   //工件列表
   workpieceList=[
   ]
+
+  equipmentID=''
   ngOnInit(): void {
     this.route.params.subscribe((data:any)=>{
       console.log(data)
+      this.equipmentID=data.EquipmentID
     })
   }
 
@@ -119,11 +122,11 @@ export class DetailOfflineComponent implements OnInit {
       "start":Number(start.getFullYear().toString() + this.pad2(start.getMonth() + 1) + this.pad2(start.getDate()) + this.pad2(start.getHours()) + this.pad2(start.getMinutes()) + this.pad2(start.getSeconds())),
       "end":Number(end.getFullYear().toString() + this.pad2(end.getMonth() + 1) + this.pad2(end.getDate()) + this.pad2(end.getHours()) + this.pad2(end.getMinutes()) + this.pad2(end.getSeconds())),
     }
-    console.log(typeof this.datevalue[0]);
-    this.http.post("http://localhost:8080/DATE",dateJSON).subscribe((res)=>{
-      console.log(res)
-    })
-    this.http.get("/api/history/234/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
+    // console.log(typeof this.datevalue[0]);
+    // this.http.post("http://localhost:8080/DATE",dateJSON).subscribe((res)=>{
+    //   console.log(res)
+    // })
+    this.http.get("/api/history/"+this.equipmentID+"/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
       this.workpieceList=res.data
       console.log(this.workpieceList)
     })

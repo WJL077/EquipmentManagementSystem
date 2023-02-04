@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import * as echart from 'echarts';
-
 
 
 @Component({
@@ -13,8 +12,7 @@ import * as echart from 'echarts';
 export class EquipmentListComponent implements OnInit {
 
   equipList1: any[] = [
-     { 'name': '234', 'status': 'success' },
-     { 'name': '233', 'status': 'success' },
+
   ]
 
 
@@ -60,43 +58,58 @@ export class EquipmentListComponent implements OnInit {
     this.route.params.subscribe((data: any) => {
       console.log(data);
 
-      // //装备列表
-      // var api = 'http://192.168.0.221:80' + data.ListID
-      // this.http.get(api).subscribe((res: any) => {
-      //   this.equipList1 = res.data;
-      //   console.log(res);
-      //
-      //   //雷达图
-      //   this.http.get("http://localhost:8080/radar").subscribe((res:any)=>{
-      //     console.log(res)
-      //     var chart=document.getElementsByClassName('radar')
-      //     for (var i = 0; i < chart.length; i++) {
-      //       var radarChart=echart.init(chart[i] as HTMLDivElement)
-      //       var option = {
-      //         // legend: {
-      //         //   data: ['Allocated Budget', 'Actual Spending']
-      //         // },
-      //         radar: {
-      //           // shape: 'circle',
-      //           indicator: [
-      //             { name: '前振', max: 6500 },
-      //             { name: '后振', max: 16000 },
-      //             { name: '前温', max: 30000 },
-      //             { name: '后温', max: 38000 },
-      //           ]
-      //         },
-      //         series: [
-      //           {
-      //             name: 'Budget vs spending',
-      //             type: 'radar',
-      //             data: [res.data]
-      //           }
-      //         ]
-      //       };
-      //       radarChart.setOption(option)
-      //     }
-      //   })
-      // })
+      //装备列表
+      var api = '/api/装备列表'
+      this.http.get(api).subscribe((res: any) => {
+        console.log(res)
+        for(var i=0;i<res.data.length;i++){
+          if(res.data[i].beltLine==data.ListID){
+            this.equipList1.push(res.data[i])
+          }
+        }
+        // this.equipList1 = res.data;
+        // console.log(res);
+
+        //雷达图
+        this.http.get("/api/233/雷达图").subscribe((res: any) => {
+          console.log(res)
+          var chart = document.getElementsByClassName('radar')
+          for (var i = 0; i < chart.length; i++) {
+            var radarChart = echart.init(chart[i] as HTMLDivElement)
+            var option = {
+              // legend: {
+              //   data: ['Allocated Budget', 'Actual Spending']
+              // },
+              tooltip:{
+                trigger: 'axis'
+              },
+              radar: {
+                // shape: 'circle',
+                indicator: [
+                  {name: '红外1环境', max: 100},
+                  {name: '红外1目标', max: 100},
+                  {name: '红外2环境', max: 100},
+                  {name: '红外2目标', max: 100},
+                  {name: '接触1', max: 100},
+                  {name: '接触2', max: 100},
+                ]
+              },
+              series: [
+                {
+                  name: '状态参数',
+                  type: 'radar',
+                  tooltip:{
+                    trigger:'item'
+                  },
+                  areaStyle:{},
+                  data: [res.data],
+                }
+              ]
+            };
+            radarChart.setOption(option)
+          }
+        })
+      })
     })
   }
 
@@ -144,8 +157,6 @@ export class EquipmentListComponent implements OnInit {
     //
     // })
   }
-
-
 
 
 }

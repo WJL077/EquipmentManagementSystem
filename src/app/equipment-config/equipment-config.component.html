@@ -38,7 +38,7 @@
 <!--      <td dTableCell>{{item.ip}}</td>-->
 
 
-      <td dTableCell [editable]="isEditable[i]" [(editing)]="item['nameEdit']">
+      <td dTableCell [editable]="false" [(editing)]="item['nameEdit']">
         <span *ngIf="!item['nameEdit']">{{item.deviceName}}</span>
         <div *ngIf="item['nameEdit']" class="edit-padding-fix">
           <input
@@ -94,9 +94,9 @@
         </d-select>
       </td>
       <td>
-        <d-button style="margin-right: 5px" (click)="alter(i)">修改</d-button>
-        <d-button style="margin-right: 5px" (click)="save(i,item)">保存</d-button>
-        <d-button style="margin-right: 5px" (click)="openDialog('warning');delete(item.deviceName)">删除</d-button>
+        <d-button style="margin-right: 5px;margin-top: 5px" (click)="alter(i)">修改</d-button>
+        <d-button style="margin-right: 5px;margin-top: 5px" (click)="save(i,item)">保存</d-button>
+        <d-button style="margin-right: 5px;margin-top: 5px" (click)="openDialog('warning');delete(i,item.deviceName)">删除</d-button>
       </td>
 
     </tr>

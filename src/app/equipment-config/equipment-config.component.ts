@@ -34,7 +34,6 @@ export class EquipmentConfigComponent implements OnInit {
 
   //修改
   alter(i) {
-    console.log(i)
     this.isEditable[i] = true;
   }
 
@@ -47,8 +46,10 @@ export class EquipmentConfigComponent implements OnInit {
 
 
   deleteName=''
+  deleteNumber:number
   //删除
-  delete(deviceName) {
+  delete(i,deviceName) {
+    this.deleteNumber=i
     this.deleteName=deviceName
   }
 
@@ -117,6 +118,12 @@ export class EquipmentConfigComponent implements OnInit {
           disabled: true,
           handler: ($event: Event) => {
             console.log("输入：", results.modalContentInstance);
+            if(results.modalContentInstance.machineNumber==null||results.modalContentInstance.machineIp[0]==null&&results.modalContentInstance.machineIp[1]==null
+              ||results.modalContentInstance.beltLine==null){
+              console.log("信息不完整")
+            }else {
+              console.log("添加成功")
+            }
             results.modalInstance.hide();
           },
         },
@@ -157,8 +164,8 @@ export class EquipmentConfigComponent implements OnInit {
           cssClass: 'primary',
           text: '确认',
           handler: ($event: Event) => {
+            console.log($event)
             results.modalInstance.hide();
-            alert("成功删除"+this.deleteName)
           },
         },
         {
@@ -234,7 +241,7 @@ export class EquipmentConfigComponent implements OnInit {
   // }
 
   productionLineOptions = [
-    '生产线1', '生产线2', '生产线3', '生产线4', '生产线5', '生产线6', '生产线7', '生产线8', '生产线9', '生产线10', '生产线11', '生产线12'
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
   ]
 
   ngOnInit() {

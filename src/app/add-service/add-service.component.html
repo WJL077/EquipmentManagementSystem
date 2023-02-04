@@ -9,7 +9,7 @@
             autocomplete="off"
             name="branch"
             placeholder="请输入设备名称"
-            [(ngModel)]="name"
+            [(ngModel)]="machineNumber"
             (ngModelChange)="formChange()"
           />
         </div>
@@ -25,7 +25,7 @@
             name="IP"
             placeholder="请填写IP地址1"
             maxlength="200"
-            [(ngModel)]="IP1"
+            [(ngModel)]="machineIp[0]"
             (ngModelChange)="formChange()"
           />
         </div>
@@ -41,7 +41,7 @@
             name="IP"
             placeholder="请填写IP地址2"
             maxlength="200"
-            [(ngModel)]="IP2"
+            [(ngModel)]="machineIp[1]"
             (ngModelChange)="formChange()"
           />
         </div>
@@ -57,7 +57,7 @@
           [appendToBodyDirections]="['leftDown', 'leftUp']"
           [options]="productionLineOptions"
           [allowClear]="true"
-          [(ngModel)]="line"
+          [(ngModel)]="beltLine"
         >
         </d-select>
       </d-form-control>
