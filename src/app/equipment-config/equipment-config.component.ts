@@ -14,6 +14,7 @@ import {originSource, SourceType} from '../shared/mock-data';
 import {DialogService} from 'ng-devui/modal';
 import {AddServiceComponent} from "../add-service/add-service.component";
 import {EditableTip} from 'ng-devui/data-table';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-equipment-config',
@@ -22,15 +23,10 @@ import {EditableTip} from 'ng-devui/data-table';
 })
 export class EquipmentConfigComponent implements OnInit {
 
-  // value1;
-  //
-  // test(value) {
-  //   this.value1 = value
-  // }
-
   editableTip = EditableTip.hover;
 
-  isEditable = [false,false,false,false];
+  //是否可被编辑
+  isEditable = [false, false, false, false];
 
   //修改
   alter(i) {
@@ -39,18 +35,28 @@ export class EquipmentConfigComponent implements OnInit {
 
 
   //保存
-  save(i,item) {
+  save(i, item) {
     this.isEditable[i] = false
     console.log(item)
+    if (item.machineNumber == null || (item.machineIp[0] == '' && item.machineIp[1] == '')
+      || item.beltLine == null|| item.beltLine == 0) {
+      alert("修改失败，信息不完整！")
+    } else {
+      this.http.put("/api",item).subscribe((res:any)=>{
+        alert("修改成功！")
+      })
+    }
+    this.getRemoteData();
   }
 
 
-  deleteName=''
-  deleteNumber:number
+  deleteName = ''
+  deleteNumber: number
+
   //删除
-  delete(i,deviceName) {
-    this.deleteNumber=i
-    this.deleteName=deviceName
+  delete(i, deviceName) {
+    this.deleteNumber = i
+    this.deleteName = deviceName
   }
 
   remoteDataSource: Array<SourceType> = [];
@@ -87,7 +93,7 @@ export class EquipmentConfigComponent implements OnInit {
 
   // colDataOptions = this.columns.slice(0, 3);
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private dialogService: DialogService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private dialogService: DialogService,private http: HttpClient) {
     this.loading = new Observable(
       function (observer: any) {
         if (this.complete) {
@@ -118,13 +124,17 @@ export class EquipmentConfigComponent implements OnInit {
           disabled: true,
           handler: ($event: Event) => {
             console.log("输入：", results.modalContentInstance);
-            if(results.modalContentInstance.machineNumber==null||results.modalContentInstance.machineIp[0]==null&&results.modalContentInstance.machineIp[1]==null
-              ||results.modalContentInstance.beltLine==null){
-              console.log("信息不完整")
-            }else {
-              console.log("添加成功")
+            if (results.modalContentInstance.machineNumber == null || results.modalContentInstance.machineIp[0] == '' && results.modalContentInstance.machineIp[1] == ''
+              || results.modalContentInstance.beltLine == null|| results.modalContentInstance.beltLine == 0) {
+              alert("添加失败,信息不完整!")
+            } else {
+              this.http.post("/api",results.modalContentInstance).subscribe((res:any)=>{
+                console.log(results)
+              })
+              alert("添加成功！")
             }
             results.modalInstance.hide();
+            this.getRemoteData();
           },
         },
         {
@@ -154,6 +164,7 @@ export class EquipmentConfigComponent implements OnInit {
     html: true,
   };
 
+  //删除设备
   openDialog(dialogtype?: string) {
     const results = this.dialogService.open({
       ...this.config,
@@ -164,8 +175,16 @@ export class EquipmentConfigComponent implements OnInit {
           cssClass: 'primary',
           text: '确认',
           handler: ($event: Event) => {
-            console.log($event)
+            console.log("/api/"+this.deleteName)
+            // this.http.post("/api/"+this.deleteName,this.deleteName).subscribe((res:any)=>{
+            //   console.log(results)
+            // })
+            this.http.delete("/api/"+this.deleteName,).subscribe((res:any)=>{
+              console.log(res)
+            })
             results.modalInstance.hide();
+            this.getRemoteData();
+            alert("删除成功！")
           },
         },
         {
@@ -181,48 +200,20 @@ export class EquipmentConfigComponent implements OnInit {
 
   deviceList = [
     {
-      deviceName: '装备1',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
-    },
-    {
-      deviceName: '装备2',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
-    },
-    {
-      deviceName: '装备3',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
-    },
-    {
-      deviceName: '装备4',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
-    },
-    {
-      deviceName: '装备5',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
-    },
-    {
-      deviceName: '装备6',
-      ip1: '192.168.1.1',
-      ip2: '',
-      productionLine: '生产线1'
+      machineNumber: '',
+      machineIp: ['', ''],
+      beltLine: '',
     },
 
   ];
 
   getRemoteData() {
+    this.http.get('/api/装备列表').subscribe((res:any)=>{
+      this.deviceList=res.data;
+    })
     this.remoteDataSource = [];
     this.showLoading = true;
-    timer(1000).subscribe(() => {
+    timer(2000).subscribe(() => {
       this.remoteDataSource = JSON.parse(
         JSON.stringify(originSource.slice(0, 1))
       );
@@ -231,21 +222,15 @@ export class EquipmentConfigComponent implements OnInit {
     });
   }
 
-  // toggleColOptions() {
-  //   if (this.colChanged) {
-  //     this.colDataOptions = this.columns.slice(0, 3);
-  //   } else {
-  //     this.colDataOptions = this.columns;
-  //   }
-  //   this.colChanged = !this.colChanged;
-  // }
-
   productionLineOptions = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
   ]
 
   ngOnInit() {
     this.getRemoteData()
+    // this.http.get('/api/装备列表').subscribe((res:any)=>{
+    //   this.deviceList=res.data;
+    // })
   }
 
 }

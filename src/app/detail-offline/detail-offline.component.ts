@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { TableWidthConfig } from 'ng-devui/data-table';
-import { originSource, SourceType } from '../shared/mock-data';
+import {Component, OnInit} from '@angular/core';
+import {TableWidthConfig} from 'ng-devui/data-table';
+import {originSource, SourceType} from '../shared/mock-data';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import * as http from "http";
+
 // import * as moment from "moment";
 
 @Component({
@@ -12,7 +13,7 @@ import * as http from "http";
   styleUrls: ['./detail-offline.component.scss']
 })
 export class DetailOfflineComponent implements OnInit {
-  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0,1)));
+  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 1)));
   // dataTableOptions = {
   //   columns: [
   //     {
@@ -46,7 +47,7 @@ export class DetailOfflineComponent implements OnInit {
     // }
   ];
 
-  realname=window.location.pathname.substring(9);
+  realname = window.location.pathname.substring(9);
 
 
   options1 = [
@@ -88,7 +89,7 @@ export class DetailOfflineComponent implements OnInit {
 
   ];
 
-  x=this.options1[0]
+  x = this.options1[0]
 
   // options2=[
   //   '峰值',
@@ -96,46 +97,57 @@ export class DetailOfflineComponent implements OnInit {
   //   '方差',
   // ]
 
-  constructor(private http:HttpClient,private route:ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  }
 
   //工件列表
-  workpieceList=[
-  ]
+  workpieceList = []
 
-  equipmentID=''
+  equipmentID = ''
+
   ngOnInit(): void {
-    this.route.params.subscribe((data:any)=>{
-      console.log(data)
-      this.equipmentID=data.EquipmentID
+    this.route.params.subscribe((data: any) => {
+      this.equipmentID = data.EquipmentID
     })
   }
 
   // 时间范围
-  datevalue=[];
+  datevalue = [];
+
   // 时间范围
-  pad2(n:any) { return n < 10 ? '0' + n : n }
-  onChange(dateList:any) {
-    var start=new Date(this.datevalue[0])
-    var end=new Date(this.datevalue[1])
+  pad2(n: any) {
+    return n < 10 ? '0' + n : n
+  }
+
+  showLoading = false
+
+  //当选择数据项后
+  onChange(dateList: any) {
+    var start = new Date(this.datevalue[0])
+    var end = new Date(this.datevalue[1])
     //yyyymmddhhmmss格式时间戳
-    var dateJSON={
-      "start":Number(start.getFullYear().toString() + this.pad2(start.getMonth() + 1) + this.pad2(start.getDate()) + this.pad2(start.getHours()) + this.pad2(start.getMinutes()) + this.pad2(start.getSeconds())),
-      "end":Number(end.getFullYear().toString() + this.pad2(end.getMonth() + 1) + this.pad2(end.getDate()) + this.pad2(end.getHours()) + this.pad2(end.getMinutes()) + this.pad2(end.getSeconds())),
+    var dateJSON = {
+      "start": Number(start.getFullYear().toString() + this.pad2(start.getMonth() + 1) + this.pad2(start.getDate()) + this.pad2(start.getHours()) + this.pad2(start.getMinutes()) + this.pad2(start.getSeconds())),
+      "end": Number(end.getFullYear().toString() + this.pad2(end.getMonth() + 1) + this.pad2(end.getDate()) + this.pad2(end.getHours()) + this.pad2(end.getMinutes()) + this.pad2(end.getSeconds())),
     }
-    // console.log(typeof this.datevalue[0]);
-    // this.http.post("http://localhost:8080/DATE",dateJSON).subscribe((res)=>{
-    //   console.log(res)
-    // })
-    this.http.get("/api/history/"+this.equipmentID+"/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
-      this.workpieceList=res.data
-      console.log(this.workpieceList)
-    })
+
+    //加载工件列表
+    this.showLoading = true
+    setTimeout(() => {
+      this.showLoading = false;
+      this.http.get("/api/history/"+this.equipmentID+"/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
+        this.workpieceList=res.data
+        console.log(this.workpieceList)
+      })
+    }, 2000)
+
   }
 
   checkBoxValues1 = [];
+
   // checkBoxValues2 = [];
 
-  onCheckbox1Change(value:any){
+  onCheckbox1Change(value: any) {
     console.log(this.checkBoxValues1);
   }
 

@@ -55,9 +55,11 @@ export class DataDiagnoseComponent implements OnInit {
     //       break;
     //   }
     // }, 2000);
-    console.log(this.dataItem)
 
-    console.log(this.dataItemJSON.rate)
+    // console.log(this.dataItem)
+    //
+    // console.log(this.dataItemJSON.rate)
+
     // switch (this.dataItem) {
     //   case this.options[0]:
     //     this.dataItemJSON=this.dataItemsJSON[0]

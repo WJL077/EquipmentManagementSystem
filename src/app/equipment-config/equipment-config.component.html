@@ -39,13 +39,13 @@
 
 
       <td dTableCell [editable]="false" [(editing)]="item['nameEdit']">
-        <span *ngIf="!item['nameEdit']">{{item.deviceName}}</span>
+        <span *ngIf="!item['nameEdit']">{{item.machineNumber}}</span>
         <div *ngIf="item['nameEdit']" class="edit-padding-fix">
           <input
             class="devui-form-control"
             autofocus
             name="lastname"
-            [(ngModel)]="item.deviceName"
+            [(ngModel)]="item.machineNumber"
             [attr.maxlength]="100"
             [attr.minlength]="3"
           />
@@ -54,13 +54,13 @@
 
 <!--      <td dTableCell>{{item.ip}}</td>-->
       <td dTableCell [editable]="isEditable[i]" [(editing)]="item['ip1Edit']">
-        <span *ngIf="!item['ip1Edit']">{{item.ip1}}</span>
+        <span *ngIf="!item['ip1Edit']">{{item.machineIp[0]}}</span>
         <div *ngIf="item['ip1Edit']" class="edit-padding-fix">
           <input
             class="devui-form-control"
             autofocus
             name="lastname"
-            [(ngModel)]="item.ip1"
+            [(ngModel)]="item.machineIp[0]"
             [attr.maxlength]="100"
             [attr.minlength]="3"
           />
@@ -68,13 +68,13 @@
       </td>
 
       <td dTableCell [editable]="isEditable[i]" [(editing)]="item['ip2Edit']">
-        <span *ngIf="!item['ip2Edit']">{{item.ip2}}</span>
+        <span *ngIf="!item['ip2Edit']">{{item.machineIp[1]}}</span>
         <div *ngIf="item['ip2Edit']" class="edit-padding-fix">
           <input
             class="devui-form-control"
             autofocus
             name="lastname"
-            [(ngModel)]="item.ip2"
+            [(ngModel)]="item.machineIp[1]"
             [attr.maxlength]="100"
             [attr.minlength]="3"
           />
@@ -83,8 +83,7 @@
 
       <td dTableCell>
         <d-select
-          placeholder="{{item.productionLine}}"
-          [(ngModel)]="item.productionLine"
+          [(ngModel)]="item.beltLine"
           [appendToBody]="true"
           [appendToBodyDirections]="['leftDown', 'leftUp']"
           [options]="productionLineOptions"
@@ -94,9 +93,9 @@
         </d-select>
       </td>
       <td>
-        <d-button style="margin-right: 5px;margin-top: 5px" (click)="alter(i)">修改</d-button>
+        <d-button style="margin-right: 5px;margin-top: 5px" (click)="alter(i)">编辑</d-button>
         <d-button style="margin-right: 5px;margin-top: 5px" (click)="save(i,item)">保存</d-button>
-        <d-button style="margin-right: 5px;margin-top: 5px" (click)="openDialog('warning');delete(i,item.deviceName)">删除</d-button>
+        <d-button style="margin-right: 5px;margin-top: 5px" (click)="openDialog('warning');delete(i,item.machineNumber)">删除</d-button>
       </td>
 
     </tr>

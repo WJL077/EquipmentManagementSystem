@@ -32,10 +32,11 @@ export class DetailRealtimeComponent implements OnInit {
   R14=[111,222,444]
   R15=[111,222,444]
 
-  ngOnInit(): void {
-    // console.log(window.location.pathname.substring(10))
-    this.route.params.subscribe((data:any)=>{
+  equipmentID=''
 
+  ngOnInit(): void {
+    this.route.params.subscribe((data:any)=>{
+      this.equipmentID=data.EquipmentID
       //初始化加载统计信息
       this.http.get("/api/realtime/"+data.EquipmentID+"/前轴承加速度X统计特征").subscribe((res:any)=>{
         console.log(res)
@@ -102,12 +103,6 @@ export class DetailRealtimeComponent implements OnInit {
 
 
   }
-
-  goBack(){
-    history.back();
-  }
-
-  offname=window.location.pathname.substring(10);
 
   options1 = [
     '前轴承加速度X',
