@@ -125,101 +125,91 @@ export class DetailRealtimeComponent implements OnInit {
   onCheckbox1Change(value:any){
     console.log(this.checkBoxValues1)
 
-    this.http.get("/api/realtime/234/前轴承加速度X").subscribe((res:any)=>{
-
-      console.log(res.data)
-      // //原始波形
-      // var chart1=document.getElementsByClassName("OriginalWaveform")
-      // var LineChart1=echart.init(chart1[0] as HTMLDivElement)
-      // var option = {
-      //   xAxis: {
-      //     type: 'category',
-      //     data: [1,2,3,4,5,6,7,8,9]
-      //   },
-      //   yAxis: {
-      //     type: 'value'
-      //   },
-      //   series: [
-      //     {
-      //       data: [res.data],
-      //       type: 'line'
-      //     }
-      //   ]
-      // };
-      // LineChart1.setOption(option)
-    })
-
-
-
-
-    // //频谱图
-    // var chart2=document.getElementsByClassName("Spectrogram")
-    // var LineChart2=echart.init(chart2[0] as HTMLDivElement)
-    // var option2 = {
-    //   xAxis: {
-    //     type: 'category',
-    //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    //   },
-    //   yAxis: {
-    //     type: 'value'
-    //   },
-    //   series: [
-    //     {
-    //       data: [150, 230, 224, 218, 135, 147, 260],
-    //       type: 'line'
-    //     }
-    //   ]
-    // };
-    // LineChart2.setOption(option2)
+    // this.http.get("/api/realtime/234/"+this.checkBoxValues1[0]).subscribe((res:any)=>{
     //
-    // //时频图
-    // var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
-    // var LineChart3=echart.init(chart3[0] as HTMLDivElement)
-    // var option3 = {
-    //   xAxis: {
-    //     type: 'category',
-    //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    //   },
-    //   yAxis: {
-    //     type: 'value'
-    //   },
-    //   series: [
-    //     {
-    //       data: [150, 230, 224, 218, 135, 147, 260],
-    //       type: 'line'
-    //     }
-    //   ]
-    // };
-    // LineChart3.setOption(option3)
+    //   // console.log(res.data)
+    //   //原始波形
+    //   var chart1=document.getElementsByClassName("OriginalWaveform")
+    //   var LineChart1=echart.init(chart1[0] as HTMLDivElement)
+    //   var option = {
+    //     xAxis: {
+    //       type: 'category',
+    //       data: []
+    //     },
+    //     yAxis: {
+    //       type: 'value'
+    //     },
+    //     series: [
+    //       {
+    //         data: res.data,
+    //         type: 'line'
+    //       }
+    //     ]
+    //   };
+    //   LineChart1.setOption(option)
+    //
+    //   //频谱图
+    //   var chart2=document.getElementsByClassName("Spectrogram")
+    //   var LineChart2=echart.init(chart2[0] as HTMLDivElement)
+    //   var option2 = {
+    //     xAxis: {
+    //       type: 'category',
+    //       data: []
+    //     },
+    //     yAxis: {
+    //       type: 'value'
+    //     },
+    //     series: [
+    //       {
+    //         data: res.data,
+    //         type: 'line'
+    //       }
+    //     ]
+    //   };
+    //   LineChart2.setOption(option2)
+    //
+    //   //时频图
+    //   var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
+    //   var LineChart3=echart.init(chart3[0] as HTMLDivElement)
+    //   var option3 = {
+    //     xAxis: {
+    //       type: 'category',
+    //       data: []
+    //     },
+    //     yAxis: {
+    //       type: 'value'
+    //     },
+    //     series: [
+    //       {
+    //         data: res.data,
+    //         type: 'line'
+    //       }
+    //     ]
+    //   };
+    //   LineChart3.setOption(option3)
+    // })
 
-
-
-    this.http.post("",value).subscribe((res:any)=>{
-      console.log(res)
-
-
-    })
   }
 
 
-  options2 = [
-    '前轴承加速度X',
-    '前轴承加速度Y',
-    '前轴承加速度Z',
-    '后轴承加速度X',
-    '后轴承加速度Y',
-    '后轴承加速度Z',
-    '前轴承位移X',
-    '前轴承位移Y',
-    '支座X',
-    '支座Y',
-    '支座Z',
-    '前轴承内圈温度',
-    '前轴承外圈温度',
-    '后轴承内圈温度',
-    '后轴承外圈温度'
-
-  ];
+  // options2 = [
+  //   '前轴承加速度X',
+  //   '前轴承加速度Y',
+  //   '前轴承加速度Z',
+  //   '后轴承加速度X',
+  //   '后轴承加速度Y',
+  //   '后轴承加速度Z',
+  //   '前轴承位移X',
+  //   '前轴承位移Y',
+  //   '支座X',
+  //   '支座Y',
+  //   '支座Z',
+  //   '前轴承内圈温度',
+  //   '前轴承外圈温度',
+  //   '后轴承内圈温度',
+  //   '后轴承外圈温度'
+  //
+  // ];
 
 
   historyChecked1=[
