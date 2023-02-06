@@ -89,33 +89,39 @@ export class DataDiagnoseComponent implements OnInit {
 
   //离线诊断
   diagnode(){
-    this.showLoading = true;
-    setTimeout(() => {
-      this.showLoading = false;
-      switch (this.dataItem) {
-        case this.options[0]:
-          this.dataItemJSON=this.dataItemsJSON[0]
-          break;
-        case this.options[1]:
-          this.dataItemJSON=this.dataItemsJSON[1]
-          break;
-        case this.options[2]:
-          this.dataItemJSON=this.dataItemsJSON[2]
-          break;
-        case this.options[3]:
-          this.dataItemJSON=this.dataItemsJSON[3]
-          break;
-        case this.options[4]:
-          this.dataItemJSON=this.dataItemsJSON[4]
-          break;
-        case this.options[5]:
-          this.dataItemJSON=this.dataItemsJSON[5]
-          break;
-        case this.options[6]:
-          this.dataItemJSON=this.dataItemsJSON[6]
-          break;
-      }
-    }, 2000);
+    console.log(this.dataItem)
+    if(this.dataItem==''){
+      alert("未选需诊断数据项！")
+    }else{
+      this.showLoading = true;
+      setTimeout(() => {
+        this.showLoading = false;
+        switch (this.dataItem) {
+          case this.options[0]:
+            this.dataItemJSON=this.dataItemsJSON[0]
+            break;
+          case this.options[1]:
+            this.dataItemJSON=this.dataItemsJSON[1]
+            break;
+          case this.options[2]:
+            this.dataItemJSON=this.dataItemsJSON[2]
+            break;
+          case this.options[3]:
+            this.dataItemJSON=this.dataItemsJSON[3]
+            break;
+          case this.options[4]:
+            this.dataItemJSON=this.dataItemsJSON[4]
+            break;
+          case this.options[5]:
+            this.dataItemJSON=this.dataItemsJSON[5]
+            break;
+          case this.options[6]:
+            this.dataItemJSON=this.dataItemsJSON[6]
+            break;
+        }
+      }, 2000);
+    }
+
   }
 
   ngOnInit(): void {
