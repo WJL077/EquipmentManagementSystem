@@ -155,6 +155,7 @@ export class DetailOfflineComponent implements OnInit {
       this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/工件列表").subscribe((res: any) => {
         this.workpieceList = res.data
         console.log("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/工件列表")
+        console.log(this.workpieceList)
       })
     }
 
@@ -200,7 +201,7 @@ export class DetailOfflineComponent implements OnInit {
           // var chart = document.getElementById('characteristic-curve')
           // var characteristicCurveChart = echart.init(chart as HTMLDivElement)
           var series = {
-            name: '',
+            name: res.name,
             type: 'line',
             stack: 'Total',
             data: res.data,

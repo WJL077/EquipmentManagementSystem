@@ -62,36 +62,6 @@ export class EquipmentConfigComponent implements OnInit {
   remoteDataSource: Array<SourceType> = [];
   showLoading = false;
   loading: LoadingType;
-  // colChanged = false;
-
-  // columns = [
-  //   {
-  //     field: 'deviceName',
-  //     header: '设备名称',
-  //     fieldType: 'text',
-  //     sortable: true,
-  //   },
-  //   {
-  //     field: 'ipAddress',
-  //     header: 'IP地址',
-  //     fieldType: 'text',
-  //     sortable: true,
-  //   },
-  //   {
-  //     field: 'productionLine',
-  //     header: '归属生产线',
-  //     fieldType: 'text',
-  //     sortable: true,
-  //   },
-  //   {
-  //     field: 'dob',
-  //     header: 'Date of birth',
-  //     fieldType: 'date',
-  //     sortable: true,
-  //   },
-  // ];
-
-  // colDataOptions = this.columns.slice(0, 3);
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private dialogService: DialogService,private http: HttpClient) {
     this.loading = new Observable(
@@ -128,7 +98,7 @@ export class EquipmentConfigComponent implements OnInit {
               || results.modalContentInstance.beltLine == null|| results.modalContentInstance.beltLine == 0) {
               alert("添加失败,信息不完整!")
             } else {
-              this.http.post("/api",results.modalContentInstance).subscribe((res:any)=>{
+              this.http.post("/api/装备列表",results.modalContentInstance).subscribe((res:any)=>{
                 console.log(results)
               })
               alert("添加成功！")
@@ -228,9 +198,6 @@ export class EquipmentConfigComponent implements OnInit {
 
   ngOnInit() {
     this.getRemoteData()
-    // this.http.get('/api/装备列表').subscribe((res:any)=>{
-    //   this.deviceList=res.data;
-    // })
   }
 
 }

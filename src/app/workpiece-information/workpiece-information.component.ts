@@ -11,6 +11,7 @@ import * as http from "http";
 })
 export class WorkpieceInformationComponent implements OnInit {
 
+  //工件编号
   workpieceName: String = ''
 
   options1 = [
@@ -20,8 +21,8 @@ export class WorkpieceInformationComponent implements OnInit {
     '后轴承加速度X',
     '后轴承加速度Y',
     '后轴承加速度Z',
-    '前轴承位移X',
-    '前轴承位移Y',
+    '位移X',
+    '位移Y',
     '支座X',
     '支座Y',
     '支座Z'
@@ -31,8 +32,141 @@ export class WorkpieceInformationComponent implements OnInit {
   checkBoxValues1 = [];
 
   onCheckbox1Change(value: any) {
-    console.log('checkbox1 checked:', value);
+    this.http.get("/api/history/bearings/"+this.workpieceName+"/"+this.checkBoxValues1[0]).subscribe((res: any) => {
+      // console.log(res.data.signal)
+      //原始波形
+      var chart1 = document.getElementsByClassName("OriginalWaveform")
+      var LineChart1 = echart.init(chart1[0] as HTMLDivElement)
+      var signal = {
+        tooltip: {
+          trigger: 'axis',
+          // position: function (pt) {
+          //   return [pt[0], '10%'];
+          // }
+        },
+        toolbox: {
+          feature: {
+            dataZoom: {
+              yAxisIndex: 'none'
+            },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        title: {
+          text: '原始波形',
+        },
+        animation: false,
+        xAxis: {
+          type: 'category',
+        },
+        yAxis: {
+          type: 'value',
+          data: 'value',
+          // boundaryGap: [0, '100%']
+        },
+        dataZoom: [
+          {
+            type: 'inside',
+            start: 0,
+            end: 100
+          },
+          {
+            start: 0,
+            end: 100
+          }
+        ],
+        series: [
+          {
+            sampling: 'lttb',
+            data: res.data.signal,
+            type: 'line',
+            tooltip: {
+              trigger: 'item'
+            },
+          }
+        ]
+      };
+      LineChart1.setOption(signal)
+
+      //频谱图
+      var chart2 = document.getElementsByClassName("Spectrogram")
+      var LineChart2 = echart.init(chart2[0] as HTMLDivElement)
+      var fft = {
+        color: '#91cc75',
+        tooltip: {
+          trigger: 'axis',
+          // position: function (pt) {
+          //   return [pt[0], '10%'];
+          // }
+        },
+        toolbox: {
+          feature: {
+            dataZoom: {
+              yAxisIndex: 'none'
+            },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        title: {
+          text: '频谱图',
+        },
+        animation: false,
+        xAxis: {
+          type: 'category',
+        },
+        yAxis: {
+          type: 'value',
+          data: 'value',
+          // boundaryGap: [0, '100%']
+        },
+        dataZoom: [
+          {
+            type: 'inside',
+            start: 0,
+            end: 100
+          },
+          {
+            start: 0,
+            end: 100
+          }
+        ],
+        series: [
+          {
+            sampling: 'lttb',
+            data: res.data.fft,
+            type: 'line',
+            tooltip: {
+              trigger: 'item'
+            },
+          }
+        ]
+      };
+      LineChart2.setOption(fft)
+
+      //   //时频图
+      //   var chart3=document.getElementsByClassName("TimeFrequencyDiagram")
+      //   var LineChart3=echart.init(chart3[0] as HTMLDivElement)
+      //   var option3 = {
+      //     xAxis: {
+      //       type: 'category',
+      //       data: []
+      //     },
+      //     yAxis: {
+      //       type: 'value'
+      //     },
+      //     series: [
+      //       {
+      //         data: res.data,
+      //         type: 'line'
+      //       }
+      //     ]
+      //   };
+      //   LineChart3.setOption(option3)
+    })
   }
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
   }
@@ -40,6 +174,7 @@ export class WorkpieceInformationComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: any) => {
       console.log("工件编号:" + data.WorkpieceID)
+      this.workpieceName=data.WorkpieceID
       this.http.get("/api/history/bearings/"+data.WorkpieceID+"/雷达图").subscribe((res: any) => {
         console.log(res.data)
         var chart = document.getElementById('radar')
@@ -83,72 +218,4 @@ export class WorkpieceInformationComponent implements OnInit {
     history.back();
   }
 
-
-  // option = {
-  //   // legend: {
-  //   //   data: ['Allocated Budget', 'Actual Spending']
-  //   // },
-  //   radar: {
-  //     // shape: 'circle',
-  //     indicator: [
-  //       { name: '前震', max: 6500 },
-  //       { name: '后震', max: 16000 },
-  //       { name: '温度', max: 30000 },
-  //       { name: '湿度', max: 38000 },
-  //     ]
-  //   },
-  //   series: [
-  //     {
-  //       name: 'Budget vs spending',
-  //       type: 'radar',
-  //       data: [
-  //         {
-  //           value: [4200, 3000, 20000, 35000],
-  //           // name: 'Allocated Budget'
-  //         },
-  //         // {
-  //         //   value: [5000, 14000, 28000, 26000],
-  //         //   name: 'Actual Spending'
-  //         // }
-  //       ]
-  //     }
-  //   ]
-  // };
-
-  ngAfterViewInit(): void {
-    // this.http.get("http://localhost:8080/radar").subscribe((res: any) => {
-    //   console.log(res)
-    //   var chart = document.getElementById('radar')
-    //   var radarChart = echart.init(chart as HTMLDivElement)
-    //   var option = {
-    //     // legend: {
-    //     //   data: ['Allocated Budget', 'Actual Spending']
-    //     // },
-    //     radar: {
-    //       // shape: 'circle',
-    //       indicator: [
-    //         {name: '前震', max: 6500},
-    //         {name: '后震', max: 16000},
-    //         {name: '温度', max: 30000},
-    //         {name: '湿度', max: 38000},
-    //       ]
-    //     },
-    //     series: [
-    //       {
-    //         name: 'Budget vs spending',
-    //         type: 'radar',
-    //         data: [res.data]
-    //         //   [
-    //         //   {
-    //         //     value: [4200, 3000, 20000, 35000],
-    //         //     // name: 'Allocated Budget'
-    //         //   },
-    //         // ]
-    //       }
-    //     ]
-    //   };
-    //   radarChart.setOption(option)
-    // })
-
-  }
 }

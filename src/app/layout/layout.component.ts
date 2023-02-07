@@ -22,7 +22,6 @@ export class LayoutComponent implements OnInit {
 
   }
 
-  logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
 
   menuChildrenList = [
     { title: '生产线1', link: '/list/1' },
