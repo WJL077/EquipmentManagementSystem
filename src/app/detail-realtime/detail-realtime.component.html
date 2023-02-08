@@ -42,9 +42,9 @@
       <d-card-title>前轴承加速度X</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R1[0]}}</p>
+    <p>峰值：{{R1[0]}}（单位）</p>
     <p>峭度：{{R1[1]}}</p>
-    <p>方差：{{R1[2]}}</p>
+    <p>方差：{{R1[2]}}（单位）</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -171,7 +171,7 @@
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R12" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>红外1温度</d-card-title>
+      <d-card-title>前轴承内圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>环境：{{R12[0]}}</p>
@@ -183,7 +183,7 @@
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R13" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>红外2温度</d-card-title>
+      <d-card-title>后轴承内圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>环境：{{R13[0]}}</p>
@@ -195,7 +195,7 @@
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R14" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>接触1温度</d-card-title>
+      <d-card-title>前轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>均值：{{R14[0]}}</p>
@@ -207,7 +207,7 @@
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R15" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>接触2温度</d-card-title>
+      <d-card-title>后轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>均值：{{R15[0]}}</p>
@@ -219,21 +219,36 @@
 
 <d-card class="history-curve" [interactive]="false">
   <d-card-header>
-    <d-avatar dCardAvatar [name]="'历'"></d-avatar>
-    <d-card-title>历史曲线</d-card-title>
+    <d-avatar dCardAvatar [name]="'趋'"></d-avatar>
+    <d-card-title>趋势曲线</d-card-title>
     <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
   </d-card-header>
   <d-card-content>
-    <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="130" [name]="'demo1'" [options]="historyChecked1"
-                      [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory1Change($event)">
+    <d-radio-group
+      [name]="'independent-city'"
+      [values]="radio"
+      [direction]="'row'"
+      [(ngModel)]="radioValue"
+      [ngStyle]="{ marginBottom: '20px' }"
+      (change)="radioChange()"
+    >
+    </d-radio-group>
+    <d-checkbox-group
+      [(ngModel)]="checkHistoryValues1"
+      [itemWidth]="130"
+      [name]="'demo1'"
+      [filterKey]="'name'"
+      [options]="historyChecked1"
+      [labelTemplate]="mylabel"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckhistory1Change($event)"
+      [disabled]="disabled">
+      <ng-template #mylabel let-disabled="disabled" let-label="label">
+        <span class="icon-collapse" style="margin-top: 2px"></span>
+        <span>{{ label }}</span>
+      </ng-template>
     </d-checkbox-group>
-    <!-- <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked2"
-        [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory2Change($event)">
-    </d-checkbox-group>
-    <d-checkbox-group [(ngModel)]="checkHistoryValues1" [itemWidth]="120" [name]="'demo1'" [options]="historyChecked3"
-        [direction]="'row'" [isShowTitle]="true" (change)="onCheckhistory3Change($event)">
-    </d-checkbox-group> -->
-
-
+    <div id="characteristic-curve" style="width: 1000px;height:500px;margin: auto;"></div>
   </d-card-content>
 </d-card>

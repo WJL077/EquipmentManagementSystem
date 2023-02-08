@@ -76,6 +76,7 @@ export class DetailOfflineComponent implements OnInit {
 
   equipmentID = ''
 
+  //特征曲线图
   option = {
     title: {
       text: ''
