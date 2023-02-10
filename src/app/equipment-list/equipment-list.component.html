@@ -1,8 +1,12 @@
 <ng-container>
-  <d-card class="card-container" [interactive]="true" *ngFor="let item of equipList1;let i=index"
-    routerLink="/realtime/{{item.machineNumber}}">
+  <d-card class="card-container" [interactive]="true" *ngFor="let item of equipList1;let i=index">
     <d-card-header>
-      <d-card-title>装备{{item.machineNumber}}</d-card-title>
+      <d-card-title>装备{{item.machineNumber}}
+        <div style="text-align: right;">
+          <d-button style="margin-top: 5px;"routerLink="/realtime/{{item.machineNumber}}">实时</d-button>
+          <d-button style="margin-left: 5px;" routerLink="/offline/{{item.machineNumber}}">历史</d-button>
+        </div>
+      </d-card-title>
     </d-card-header>
     <d-card-content>
       <d-status type="success"></d-status>
@@ -14,5 +18,5 @@
   </d-card>
 </ng-container>
 
-<!--<div class="radar" style="width: 200px;height:200px;"></div>-->
+
 

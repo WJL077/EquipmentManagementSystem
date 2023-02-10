@@ -104,13 +104,14 @@ export class DetailOfflineComponent implements OnInit {
       data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     },
     yAxis: {
+      name:'',
       type: 'value'
     },
     series: [
       {
         name: '',
         type: 'line',
-        stack: 'Total',
+        // stack: 'Total',
         data: '',
       },
     ]
@@ -158,66 +159,444 @@ export class DetailOfflineComponent implements OnInit {
         console.log("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/工件列表")
         console.log(this.workpieceList)
       })
+
+      //工艺数据曲线
+      //进给速度
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/进给速度").subscribe((res: any) => {
+
+        //二维数组行列互换
+        let transposedArray: any[][] = [];
+        for (let i = 0; i < res.data[0].length; i++) {
+          transposedArray.push([]);
+          for (let j = 0; j < res.data.length; j++) {
+            transposedArray[i].push(res.data[j][i]);
+          }
+        }
+        // console.log(transposedArray)
+        var chart = document.getElementsByClassName('data-curve')
+        var feedSpeedChart = echart.init(chart[0] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '进给速度'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['粗磨1', '粗磨2', '精磨', '光磨']
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              name: '粗磨1',
+              type: 'line',
+              data: transposedArray[0],
+            },
+            {
+              name: '粗磨2',
+              type: 'line',
+              data: transposedArray[1],
+            },
+            {
+              name: '精磨',
+              type: 'line',
+              data: transposedArray[2],
+            },
+            {
+              name: '光磨',
+              type: 'line',
+              data: transposedArray[3],
+            },
+          ]
+        };
+        feedSpeedChart.setOption(option)
+      })
+
+      //主轴线速度
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/主轴线速度").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('data-curve')
+        var spindleLinearVelocityChart = echart.init(chart[1] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '主轴线速度'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        spindleLinearVelocityChart.setOption(option)
+      })
+
+      //工件轴转速
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/工件轴转速").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('data-curve')
+        var workpieceShaftSpeedChart = echart.init(chart[2] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '工件轴转速'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        workpieceShaftSpeedChart.setOption(option)
+      })
+
+      //质量参数统计
+      //尺寸
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/尺寸").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('parameter')
+        var measureChart = echart.init(chart[0] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '尺寸'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        measureChart.setOption(option)
+      })
+
+      //粗糙度
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/粗糙度").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('parameter')
+        var roughnessChart = echart.init(chart[1] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '粗糙度'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        roughnessChart.setOption(option)
+      })
+
+      //波纹度
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/波纹度").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('parameter')
+        var wavinessChart = echart.init(chart[2] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '波纹度'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        wavinessChart.setOption(option)
+      })
+
+      //圆度
+      this.http.get("/api/history/" + this.equipmentID + "/" + dateJSON.start + "/" + dateJSON.end + "/圆度").subscribe((res: any) => {
+
+        var chart = document.getElementsByClassName('parameter')
+        var roundnessChart = echart.init(chart[3] as HTMLDivElement)
+        var option = {
+          title: {
+            text: '圆度'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              type: 'line',
+              data: res.data,
+            },
+          ]
+        };
+        roundnessChart.setOption(option)
+      })
+
     }
-
-
-    // this.showLoading = true
-    // setTimeout(() => {
-    //   this.showLoading = false;
-    //   this.http.get("/api/history/"+this.equipmentID+"/"+dateJSON.start+"/"+dateJSON.end+"/工件列表").subscribe((res:any)=>{
-    //     this.workpieceList=res.data
-    //     console.log(res.data)
-    //   })
-    // }, 2000)
 
   }
 
-  checkBoxValues1 = [];
-
-  // checkBoxValues2 = [];
-
   startTime: number
   endTime: number
-
   name = ''
 
-  onCheckbox1Change(value: any) {
+  //四个单选框
+  radio = ['峰值', '峭度', '方差', '温度']
+  //单选的ngModel值
+  radioValue = ''
+  //是否可选
+  disabled = true
 
-    if(this.startTime==null||this.endTime==null){
-      alert("未选择时间范围或所选时间范围不合法！")
-    }else{
-      this.option.series = []
-
-      //初始化特征曲线图
-      var chart = document.getElementById('characteristic-curve')
-      var characteristicCurveChart = echart.init(chart as HTMLDivElement)
-      characteristicCurveChart.clear()
-      characteristicCurveChart.setOption(this.option)
-      for (var i = 0; i < this.checkBoxValues1.length; i++) {
-        // this.name=this.checkBoxValues1[i]
-        // console.log("name:"+this.name)
-        this.http.get("/api/history/" + this.equipmentID + "/" + this.startTime + "/" + this.endTime + "/" + this.checkBoxValues1[i]).subscribe((res: any) => {
-          console.log(res.data)
-          //特征曲线图
-          // var chart = document.getElementById('characteristic-curve')
-          // var characteristicCurveChart = echart.init(chart as HTMLDivElement)
-          var series = {
-            name: res.name,
-            type: 'line',
-            stack: 'Total',
-            data: res.data,
-          }
-          this.option.series.push(series)
-          characteristicCurveChart.setOption(this.option)
-
-        })
+  //当单选改变时
+  radioChange() {
+    //初始化特征曲线图
+    this.option.series = []
+    this.option.yAxis.name=''
+    var chart = document.getElementById('characteristic-curve')
+    var characteristicCurveChart = echart.init(chart as HTMLDivElement)
+    characteristicCurveChart.clear()
+    characteristicCurveChart.setOption(this.option)
+    this.checkHistoryValues1 = []
+    if (this.radioValue != '') {
+      this.disabled = false
+    } else {
+      this.disabled = true
+    }
+    if (this.radioValue == '温度') {
+      this.option.yAxis.name='℃'
+      for (var i = 0; i < 11; i++) {
+        this.historyChecked1[i].disabled = true
+      }
+      for (var i = 11; i < 15; i++) {
+        this.historyChecked1[i].disabled = false
+      }
+    }
+    if (this.radioValue == '峰值' || this.radioValue == '峭度' || this.radioValue == '方差') {
+      for (var i = 0; i < 11; i++) {
+        this.historyChecked1[i].disabled = false
+      }
+      for (var i = 11; i < 15; i++) {
+        this.historyChecked1[i].disabled = true
       }
     }
   }
 
-  // onCheckbox2Change(value:any){
-  //   console.log(this.checkBoxValues2);
-  // }
+  historyChecked1 = [
+    {name: '前轴承加速度X', disabled: false},
+    {name: '前轴承加速度Y', disabled: false},
+    {name: '前轴承加速度Z', disabled: false},
+    {name: '后轴承加速度X', disabled: false},
+    {name: '后轴承加速度Y', disabled: false},
+    {name: '后轴承加速度Z', disabled: false},
+    {name: '位移X', disabled: false},
+    {name: '位移Y', disabled: false},
+    {name: '支座加速度X', disabled: false},
+    {name: '支座加速度Y', disabled: false},
+    {name: '支座加速度Z', disabled: false},
+    {name: '前轴承内圈', disabled: false},
+    {name: '后轴承内圈', disabled: false},
+    {name: '前轴承外圈', disabled: false},
+    {name: '后轴承外圈', disabled: false},
+  ]
 
+  //历史曲线
+  checkHistoryValues1 = []
+
+  onCheckhistory1Change(value: any) {
+    if (this.startTime == null || this.endTime == null) {
+      alert("未选择时间范围或所选时间范围不合法！")
+    } else {
+      this.option.series = []
+      this.option.yAxis.name=''
+      if (this.checkHistoryValues1.length < 1) {
+        this.checkHistoryValues1 = []
+        if (this.radioValue == '温度') {
+          for (var i = 11; i < this.historyChecked1.length; i++) {
+            this.historyChecked1[i].disabled = false
+          }
+        } else {
+          for (var i = 0; i < 11; i++) {
+            this.historyChecked1[i].disabled = false
+          }
+        }
+      } else if (this.checkHistoryValues1[0].name == '位移X' || this.checkHistoryValues1[0].name == '位移Y') {
+        this.option.yAxis.name='m/s'
+        for (var i = 0; i < 6; i++) {
+          this.historyChecked1[i].disabled = true
+        }
+        for (var i = 8; i < 11; i++) {
+          this.historyChecked1[i].disabled = true
+        }
+      } else if (this.checkHistoryValues1[0].name == '前轴承加速度X' || this.checkHistoryValues1[0].name == '前轴承加速度Y'
+        || this.checkHistoryValues1[0].name == '前轴承加速度Z' || this.checkHistoryValues1[0].name == '后轴承加速度X'
+        || this.checkHistoryValues1[0].name == '后轴承加速度Y' || this.checkHistoryValues1[0].name == '后轴承加速度Z'
+        || this.checkHistoryValues1[0].name == '支座加速度X' || this.checkHistoryValues1[0].name == '支座加速度Y'
+        || this.checkHistoryValues1[0].name == '支座加速度Z') {
+        this.option.yAxis.name='m/s²'
+        for (var i = 6; i < 8; i++) {
+          this.historyChecked1[i].disabled = true
+        }
+      }
+
+      //初始化特征曲线图
+      this.option.series = []
+      var chart = document.getElementById('characteristic-curve')
+      var characteristicCurveChart = echart.init(chart as HTMLDivElement)
+      characteristicCurveChart.clear()
+      characteristicCurveChart.setOption(this.option)
+      for (var i = 0; i < this.checkHistoryValues1.length; i++) {
+        this.http.get("/api/history/" + this.equipmentID + "/" + this.startTime + "/" + this.endTime + "/" + this.checkHistoryValues1[i].name + this.radioValue).subscribe((res: any) => {
+          console.log(res.data)
+          var series = {
+            name: res.name,
+            type: 'line',
+            // stack: 'Total',
+            data: res.data,
+          }
+          this.option.series.push(series)
+          characteristicCurveChart.setOption(this.option)
+        })
+      }
+      // console.log(this.option.series)
+    }
+  }
 
 }

@@ -27,12 +27,10 @@ d-card {
 
 .parameter {
   border: 1px solid gainsboro;
+  padding: 10px;
+  height: 400px;
   border-radius: 10px;
-  width: 100%;
-  height: 300px;
-  margin-top: 30px;
-  //margin-left: 22px;
-  float: bottom;
+  margin-top: 20px;
 }
 
 //.parameter-statistics {
@@ -64,6 +62,7 @@ h1 :hover {
 
 .data-curve {
   border: 1px solid gainsboro;
-  height: 200px;
+  padding: 10px;
+  height: 400px;
   border-radius: 10px;
 }

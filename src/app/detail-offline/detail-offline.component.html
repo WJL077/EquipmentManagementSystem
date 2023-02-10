@@ -6,7 +6,9 @@
   [format]="'y-MM-dd'"
   (confirmEvent)="onChange($event)"
 ></d-range-datepicker-pro>
-<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/realtime/{{equipmentID}}"> 实时</d-button>
+
+<d-button icon="icon-arrow-right" style="margin-left: 5px" bsStyle="primary" routerLink="/realtime/{{equipmentID}}"> 实时</d-button>
+<d-button icon="icon-arrow-left" bsStyle="primary" routerLink="/list/1"> 返回</d-button>
 
 
 <d-card class="card-container" [interactive]="false">
@@ -16,8 +18,30 @@
     <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
   </d-card-header>
   <d-card-content>
-    <d-checkbox-group [(ngModel)]="checkBoxValues1" [itemWidth]="130" [name]="'demo1'" [options]="options1"
-                      [direction]="'row'" [isShowTitle]="true" (change)="onCheckbox1Change($event)">
+    <d-radio-group
+      [name]="'independent-city'"
+      [values]="radio"
+      [direction]="'row'"
+      [(ngModel)]="radioValue"
+      [ngStyle]="{ marginBottom: '20px' }"
+      (change)="radioChange()"
+    >
+    </d-radio-group>
+    <d-checkbox-group
+      [(ngModel)]="checkHistoryValues1"
+      [itemWidth]="130"
+      [name]="'demo1'"
+      [filterKey]="'name'"
+      [options]="historyChecked1"
+      [labelTemplate]="mylabel"
+      [direction]="'row'"
+      [isShowTitle]="true"
+      (change)="onCheckhistory1Change($event)"
+      [disabled]="disabled">
+      <ng-template #mylabel let-disabled="disabled" let-label="label">
+        <span class="icon-collapse" style="margin-top: 2px"></span>
+        <span>{{ label }}</span>
+      </ng-template>
     </d-checkbox-group>
 
     <div id="characteristic-curve" style="width: 700px;height:300px;margin: auto;"></div>
@@ -35,20 +59,19 @@
   <d-card-content>
 
     <div dImagePreview style="text-align: center;margin-top: 20px;">
-      <div class="data-curve"></div>
-      <h1>粗磨1</h1>
+      <div class="data-curve">
+        <h1>进给速度</h1>
+      </div>
     </div>
     <div dImagePreview style="text-align: center;margin-top: 20px;">
-      <div class="data-curve"></div>
-      <h1>粗磨2</h1>
+      <div class="data-curve">
+        <h1>主轴线速度</h1>
+      </div>
     </div>
     <div dImagePreview style="text-align: center;margin-top: 20px;">
-      <div class="data-curve"></div>
-      <h1>精磨</h1>
-    </div>
-    <div dImagePreview style="text-align: center;margin-top: 20px;">
-      <div class="data-curve"></div>
-      <h1>光磨</h1>
+      <div class="data-curve">
+        <h1>工件轴转速</h1>
+      </div>
     </div>
 
   </d-card-content>
@@ -64,28 +87,21 @@
   <d-card-content>
 
     <div class="parameter">
-      <h1>外径尺寸</h1>
+      <h1>尺寸</h1>
     </div>
 
     <div class="parameter">
-      <h1>内径尺寸</h1>
-    </div>
-
-    <div class="parameter">
-      <h1>表面粗糙度</h1>
-    </div>
-
-    <div class="parameter">
-      <h1>圆度</h1>
+      <h1>粗糙度</h1>
     </div>
 
     <div class="parameter">
       <h1>波纹度</h1>
     </div>
 
-    <!--        <div class="parameter">-->
-    <!--            <p>其它</p>-->
-    <!--        </div>-->
+    <div class="parameter">
+      <h1>圆度</h1>
+    </div>
+
   </d-card-content>
 </d-card>
 

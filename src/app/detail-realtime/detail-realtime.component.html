@@ -1,8 +1,8 @@
 <!-- <d-button icon="icon-go-back" bsStyle="primary" bsSize="xs" title="add" shape="circle" class="goBack"
     routerLink="/list" (click)="goBack()"></d-button> -->
 
-<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/offline/{{equipmentID}}" class="history"> 历史</d-button>
-
+<d-button icon="icon-arrow-right" bsStyle="primary" routerLink="/offline/{{equipmentID}}" class="history" style="margin-left: 5px"> 历史</d-button>
+<d-button icon="icon-arrow-left" bsStyle="primary" routerLink="/list/1"> 返回</d-button>
 
 <d-card class="card-container three" [interactive]="false">
   <!--    <d-card-header>-->
@@ -42,9 +42,9 @@
       <d-card-title>前轴承加速度X</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R1[0]}}（单位）</p>
-    <p>峭度：{{R1[1]}}</p>
-    <p>方差：{{R1[2]}}（单位）</p>
+    <p>峰值：{{R1[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R1[1].toFixed(2)}}</p>
+    <p>方差：{{R1[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -54,9 +54,9 @@
       <d-card-title>前轴承加速度Y</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R2[0]}}</p>
-    <p>峭度：{{R2[1]}}</p>
-    <p>方差：{{R2[2]}}</p>
+    <p>峰值：{{R2[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R2[1].toFixed(2)}}</p>
+    <p>方差：{{R2[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -66,9 +66,9 @@
       <d-card-title>前轴承加速度Z</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R3[0]}}</p>
-    <p>峭度：{{R3[1]}}</p>
-    <p>方差：{{R3[2]}}</p>
+    <p>峰值：{{R3[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R3[1].toFixed(2)}}</p>
+    <p>方差：{{R3[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -78,9 +78,9 @@
       <d-card-title>后轴承加速度X</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R4[0]}}</p>
-    <p>峭度：{{R4[1]}}</p>
-    <p>方差：{{R4[2]}}</p>
+    <p>峰值：{{R4[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R4[1].toFixed(2)}}</p>
+    <p>方差：{{R4[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -90,9 +90,9 @@
       <d-card-title>后轴承加速度Y</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R5[0]}}</p>
-    <p>峭度：{{R5[1]}}</p>
-    <p>方差：{{R5[2]}}</p>
+    <p>峰值：{{R5[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R5[1].toFixed(2)}}</p>
+    <p>方差：{{R5[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -102,9 +102,9 @@
       <d-card-title>后轴承加速度Z</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R6[0]}}</p>
-    <p>峭度：{{R6[1]}}</p>
-    <p>方差：{{R6[2]}}</p>
+    <p>峰值：{{R6[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R6[1].toFixed(2)}}</p>
+    <p>方差：{{R6[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -114,9 +114,9 @@
       <d-card-title>前轴承位移X</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R7[0]}}</p>
-    <p>峭度：{{R7[1]}}</p>
-    <p>方差：{{R7[2]}}</p>
+    <p>峰值：{{R7[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R7[1].toFixed(2)}}</p>
+    <p>方差：{{R7[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -126,45 +126,45 @@
       <d-card-title>前轴承位移Y</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R8[0]}}</p>
-    <p>峭度：{{R8[1]}}</p>
-    <p>方差：{{R8[2]}}</p>
+    <p>峰值：{{R8[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R8[1].toFixed(2)}}</p>
+    <p>方差：{{R8[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R9" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>支座X</d-card-title>
+      <d-card-title>支座加速度X</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R9[0]}}</p>
-    <p>峭度：{{R9[1]}}</p>
-    <p>方差：{{R9[2]}}</p>
+    <p>峰值：{{R9[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R9[1].toFixed(2)}}</p>
+    <p>方差：{{R9[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R10" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>支座Y</d-card-title>
+      <d-card-title>支座加速度Y</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R10[0]}}</p>
-    <p>峭度：{{R10[1]}}</p>
-    <p>方差：{{R10[2]}}</p>
+    <p>峰值：{{R10[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R10[1].toFixed(2)}}</p>
+    <p>方差：{{R10[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
   <d-card class="statistic" [interactive]="false" [(ngModel)]="R11" ngDefaultControl>
     <d-card-header>
       <d-avatar dCardAvatar [name]="'统'"></d-avatar>
-      <d-card-title>支座Z</d-card-title>
+      <d-card-title>支座加速度Z</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>峰值：{{R11[0]}}</p>
-    <p>峭度：{{R11[1]}}</p>
-    <p>方差：{{R11[2]}}</p>
+    <p>峰值：{{R11[0].toFixed(2)}}m/s²</p>
+    <p>峭度：{{R11[1].toFixed(2)}}</p>
+    <p>方差：{{R11[2].toFixed(2)}}m/s²</p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -174,8 +174,8 @@
       <d-card-title>前轴承内圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>环境：{{R12[0]}}</p>
-    <p>目标：{{R12[1]}}</p>
+    <p>环境：{{R12[0].toFixed(2)}}°C</p>
+    <p>目标：{{R12[1].toFixed(2)}}°C</p>
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
@@ -186,8 +186,8 @@
       <d-card-title>后轴承内圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>环境：{{R13[0]}}</p>
-    <p>目标：{{R13[1]}}</p>
+    <p>环境：{{R13[0].toFixed(2)}}°C</p>
+    <p>目标：{{R13[1].toFixed(2)}}°C</p>
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
@@ -198,8 +198,8 @@
       <d-card-title>前轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>均值：{{R14[0]}}</p>
-    <p>峰值：{{R14[1]}}</p>
+    <p>目标：{{R14[0].toFixed(2)}}°C</p>
+<!--    <p>峰值：{{R14[1]}}</p>-->
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
@@ -210,8 +210,8 @@
       <d-card-title>后轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>均值：{{R15[0]}}</p>
-    <p>峰值：{{R15[1]}}</p>
+    <p>目标：{{R15[0].toFixed(2)}}°C</p>
+<!--    <p>峰值：{{R15[1]}}</p>-->
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>

@@ -24,6 +24,7 @@ export class EquipmentListComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.route.params.subscribe((data: any) => {
       //data.ListID:生产线号
 
