@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import * as echart from "echarts";
-import * as http from "http";
-
 @Component({
   selector: 'app-detail-realtime',
   templateUrl: './detail-realtime.component.html',
@@ -61,23 +59,23 @@ export class DetailRealtimeComponent implements OnInit {
 
         this.R6 = res.data
       })
-      this.http.get("/api/realtime/" + data.EquipmentID + "/位移X统计特征").subscribe((res: any) => {
+      this.http.get("/api/realtime/" + data.EquipmentID + "/前轴承位移X统计特征").subscribe((res: any) => {
 
         this.R7 = res.data
       })
-      this.http.get("/api/realtime/" + data.EquipmentID + "/位移Y统计特征").subscribe((res: any) => {
+      this.http.get("/api/realtime/" + data.EquipmentID + "/前轴承位移Y统计特征").subscribe((res: any) => {
 
         this.R8 = res.data
       })
-      this.http.get("/api/realtime/" + data.EquipmentID + "/支座X统计特征").subscribe((res: any) => {
+      this.http.get("/api/realtime/" + data.EquipmentID + "/支座加速度X统计特征").subscribe((res: any) => {
 
         this.R9 = res.data
       })
-      this.http.get("/api/realtime/" + data.EquipmentID + "/支座Y统计特征").subscribe((res: any) => {
+      this.http.get("/api/realtime/" + data.EquipmentID + "/支座加速度Y统计特征").subscribe((res: any) => {
 
         this.R10 = res.data
       })
-      this.http.get("/api/realtime/" + data.EquipmentID + "/支座Z统计特征").subscribe((res: any) => {
+      this.http.get("/api/realtime/" + data.EquipmentID + "/支座加速度Z统计特征").subscribe((res: any) => {
 
         this.R11 = res.data
       })
@@ -115,8 +113,8 @@ export class DetailRealtimeComponent implements OnInit {
     '后轴承加速度X',
     '后轴承加速度Y',
     '后轴承加速度Z',
-    '位移X',
-    '位移Y',
+    '前轴承位移X',
+    '前轴承位移Y',
     '支座加速度X',
     '支座加速度Y',
     '支座加速度Z'
@@ -145,9 +143,12 @@ export class DetailRealtimeComponent implements OnInit {
     },
     animation: false,
     xAxis: {
+      name:'时间s',
       type: 'category',
+      data:[]
     },
     yAxis: {
+      name:'幅值',
       type: 'value',
       data: 'value',
       // boundaryGap: [0, '100%']
@@ -197,9 +198,12 @@ export class DetailRealtimeComponent implements OnInit {
     },
     animation: false,
     xAxis: {
+      name:'频率Hz',
       type: 'category',
+      data:[]
     },
     yAxis: {
+      name:'幅值',
       type: 'value',
       data: 'value',
       // boundaryGap: [0, '100%']
@@ -246,6 +250,7 @@ export class DetailRealtimeComponent implements OnInit {
     LineChart2.clear()
     LineChart2.setOption(this.fft)
 
+
     for(var i=0;i<this.checkBoxValues1.length;i++){
       this.http.get("/api/realtime/" + this.equipmentID + "/" + this.checkBoxValues1[i]).subscribe((res: any) => {
         var series1={
@@ -258,7 +263,8 @@ export class DetailRealtimeComponent implements OnInit {
           },
         }
         series1.name=res.name
-        series1.data=res.data.signal
+        this.signal.xAxis.data=res.data.signal.signal_x
+        series1.data=res.data.signal.signal_y
         this.signal.series.push(series1)
         // console.log(this.signal.series)
         LineChart1.setOption(this.signal)
@@ -273,45 +279,60 @@ export class DetailRealtimeComponent implements OnInit {
           },
         }
         series2.name=res.name
-        series2.data=res.data.fft
+        this.fft.xAxis.data=res.data.fft.fft_x
+        series2.data=res.data.fft.fft_y
         this.fft.series.push(series2)
         LineChart2.setOption(this.fft)
 
+        //时频图
+        var data = res.data.stft.stft
+        var chart = document.getElementById('TimeFrequencyDiagram')
+        var hotChart = echart.init(chart as HTMLDivElement)
+        var option = {
+          tooltip: {},
+          title: {
+            text: '时频图',
+          },
+          xAxis: {
+            name:'时间s',
+            type: 'category',
+            // data: ['A', 'B', 'C']
+          },
+          yAxis: {
+            name:'频率Hz',
+            type: 'category',
+            // data: ['1', '2', '3']
+          },
+          visualMap: {
+            itemWidth:10,
+            align:'left',
+            min: 0,
+            max: 4,
+            calculable: true,
+            inRange: {
+              color: [
+                '#313695',
+                '#4575b4',
+                '#74add1',
+                '#abd9e9',
+                '#e0f3f8',
+                '#ffffbf',
+                '#fee090',
+                '#fdae61',
+                '#f46d43',
+                '#d73027',
+                '#a50026'
+              ]
+            }
+          },
+          series: [{
+            type: 'heatmap',
+            data: data
+          }]
+        };
+        hotChart.setOption(option)
+
       })
-      //时频图demo
-      // var data = [
-      //   [0, 0, 5],
-      //   [0, 1, 1],
-      //   [0, 2, 0],
-      //   [1, 0, 6],
-      //   [1, 1, 3],
-      //   [1, 2, 7],
-      //   [2, 0, 2],
-      //   [2, 1, 2],
-      //   [2, 2, 8]
-      // ];
-      // var chart = document.getElementById('hot')
-      // var hotChart = echart.init(chart as HTMLDivElement)
-      // var option = {
-      //   xAxis: {
-      //     type: 'category',
-      //     // data: ['A', 'B', 'C']
-      //   },
-      //   yAxis: {
-      //     type: 'category',
-      //     // data: ['1', '2', '3']
-      //   },
-      //   visualMap: {
-      //     min: 0,
-      //     max: 8,
-      //     calculable: true
-      //   },
-      //   series: [{
-      //     type: 'heatmap',
-      //     data: data
-      //   }]
-      // };
-      // hotChart.setOption(option)
     }
 
 
@@ -393,8 +414,8 @@ export class DetailRealtimeComponent implements OnInit {
     {name: '后轴承加速度X', disabled: false},
     {name: '后轴承加速度Y', disabled: false},
     {name: '后轴承加速度Z', disabled: false},
-    {name: '位移X', disabled: false},
-    {name: '位移Y', disabled: false},
+    {name: '前轴承位移X', disabled: false},
+    {name: '前轴承位移Y', disabled: false},
     {name: '支座加速度X', disabled: false},
     {name: '支座加速度Y', disabled: false},
     {name: '支座加速度Z', disabled: false},
@@ -461,7 +482,7 @@ export class DetailRealtimeComponent implements OnInit {
           this.historyChecked1[i].disabled = false
         }
       }
-    } else if (this.checkHistoryValues1[0].name == '位移X' || this.checkHistoryValues1[0].name == '位移Y') {
+    } else if (this.checkHistoryValues1[0].name == '前轴承位移X' || this.checkHistoryValues1[0].name == '前轴承位移Y') {
       this.option.yAxis.name='m/s'
       for (var i = 0; i < 6; i++) {
         this.historyChecked1[i].disabled = true

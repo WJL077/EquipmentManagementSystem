@@ -21,11 +21,11 @@ export class WorkpieceInformationComponent implements OnInit {
     '后轴承加速度X',
     '后轴承加速度Y',
     '后轴承加速度Z',
-    '位移X',
-    '位移Y',
-    '支座X',
-    '支座Y',
-    '支座Z'
+    '前轴承位移X',
+    '前轴承位移Y',
+    '支座加速度X',
+    '支座加速度Y',
+    '支座加速度Z'
   ];
 
   //原始波形
@@ -50,9 +50,12 @@ export class WorkpieceInformationComponent implements OnInit {
     },
     animation: false,
     xAxis: {
+      name:'时间s',
       type: 'category',
+      data:[]
     },
     yAxis: {
+      name:'幅值',
       type: 'value',
       data: 'value',
       // boundaryGap: [0, '100%']
@@ -102,9 +105,12 @@ export class WorkpieceInformationComponent implements OnInit {
     },
     animation: false,
     xAxis: {
+      name:'频率Hz',
       type: 'category',
+      data:[]
     },
     yAxis: {
+      name:'幅值',
       type: 'value',
       data: 'value',
       // boundaryGap: [0, '100%']
@@ -162,7 +168,8 @@ export class WorkpieceInformationComponent implements OnInit {
           },
         }
         series1.name=res.name
-        series1.data=res.data.signal
+        this.signal.xAxis.data=res.data.signal.signal_x
+        series1.data=res.data.signal.signal_y
         this.signal.series.push(series1)
         // console.log(this.signal.series)
         LineChart1.setOption(this.signal)
@@ -177,9 +184,58 @@ export class WorkpieceInformationComponent implements OnInit {
           },
         }
         series2.name=res.name
-        series2.data=res.data.fft
+        this.fft.xAxis.data=res.data.fft.fft_x
+        series2.data=res.data.fft.fft_y
         this.fft.series.push(series2)
         LineChart2.setOption(this.fft)
+
+        //时频图
+        var data = res.data.stft.stft
+        var chart = document.getElementById('TimeFrequencyDiagram')
+        var hotChart = echart.init(chart as HTMLDivElement)
+        var option = {
+          tooltip: {},
+          title: {
+            text: '时频图',
+          },
+          xAxis: {
+            name:'时间s',
+            type: 'category',
+            // data: ['A', 'B', 'C']
+          },
+          yAxis: {
+            name:'频率Hz',
+            type: 'category',
+            // data: ['1', '2', '3']
+          },
+          visualMap: {
+            itemWidth:10,
+            align:'left',
+            min: 0,
+            max: 4,
+            calculable: true,
+            inRange: {
+              color: [
+                '#313695',
+                '#4575b4',
+                '#74add1',
+                '#abd9e9',
+                '#e0f3f8',
+                '#ffffbf',
+                '#fee090',
+                '#fdae61',
+                '#f46d43',
+                '#d73027',
+                '#a50026'
+              ]
+            }
+          },
+          series: [{
+            type: 'heatmap',
+            data: data
+          }]
+        };
+        hotChart.setOption(option)
 
 
       })

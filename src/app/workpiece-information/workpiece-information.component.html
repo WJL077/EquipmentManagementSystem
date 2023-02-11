@@ -21,8 +21,7 @@
     </div>
 
     <div class="time-frequency">
-      <h1>时频图</h1>
-      <div class="TimeFrequencyDiagram" style="width:100%;height:100%;margin:auto;padding: 20px"></div>
+      <div id="TimeFrequencyDiagram" style="width:100%;height:100%;margin:auto;padding: 20px"></div>
     </div>
 
   </d-card-content>
@@ -42,21 +41,21 @@
         <div class="content-box" [(ngModel)]="technologicalParameter" ngDefaultControl>
           <h1>工艺参数</h1>
           <h2>进给量：</h2>
-          <h3>粗磨1：{{technologicalParameter[0][0].toFixed(2)}}</h3>
-          <h3>粗磨2：{{technologicalParameter[0][1].toFixed(2)}}</h3>
-          <h3>精磨：{{technologicalParameter[0][2].toFixed(2)}}</h3>
-          <h3>光磨：{{technologicalParameter[0][3].toFixed(2)}}</h3>
-          <h2>工件轴速度：{{technologicalParameter[1].toFixed(2)}}</h2>
-          <h2>刀具轴速度：{{technologicalParameter[2].toFixed(2)}}</h2>
+          <h3>粗磨1：{{technologicalParameter[0][0].toFixed(2)}}mm/min</h3>
+          <h3>粗磨2：{{technologicalParameter[0][1].toFixed(2)}}mm/min</h3>
+          <h3>精磨：{{technologicalParameter[0][2].toFixed(2)}}mm/min</h3>
+          <h3>光磨：{{technologicalParameter[0][3].toFixed(2)}}mm/min</h3>
+          <h2>主轴线速度：{{technologicalParameter[1].toFixed(2)}}m/s</h2>
+          <h2>工件轴转速：{{technologicalParameter[2].toFixed(2)}}r/min</h2>
         </div>
       </d-col>
       <d-col [dSpan]="8">
         <div class="content-box" [(ngModel)]="workpieceQuality" ngDefaultControl>
           <h1>工件质量</h1>
-          <h2>粗糙度：{{workpieceQuality[0].toFixed(2)}}</h2>
-          <h2>波纹度：{{workpieceQuality[1].toFixed(2)}}</h2>
-          <h2>外径尺寸：{{workpieceQuality[2].toFixed(2)}}</h2>
-          <h2>内径尺寸：{{workpieceQuality[3].toFixed(2)}}</h2>
+          <h2>粗糙度：{{workpieceQuality[0].toFixed(2)}}μm</h2>
+          <h2>波纹度：{{workpieceQuality[1].toFixed(2)}}μm</h2>
+          <h2>外径尺寸：{{workpieceQuality[2].toFixed(2)}}μm</h2>
+          <h2>内径尺寸：{{workpieceQuality[3].toFixed(2)}}μm</h2>
         </div>
       </d-col>
     </d-row>

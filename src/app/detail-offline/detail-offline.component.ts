@@ -34,8 +34,8 @@ export class DetailOfflineComponent implements OnInit {
     '后轴承加速度X峰值',
     '后轴承加速度Y峰值',
     '后轴承加速度Z峰值',
-    '位移X峰值',
-    '位移Y峰值',
+    '前轴承位移X峰值',
+    '前轴承位移Y峰值',
     '支座X峰值',
     '支座Y峰值',
     '支座Z峰值',
@@ -46,8 +46,8 @@ export class DetailOfflineComponent implements OnInit {
     '后轴承加速度X峭度',
     '后轴承加速度Y峭度',
     '后轴承加速度Z峭度',
-    '位移X峭度',
-    '位移Y峭度',
+    '前轴承位移X峭度',
+    '前轴承位移Y峭度',
     '支座X峭度',
     '支座Y峭度',
     '支座Z峭度',
@@ -58,8 +58,8 @@ export class DetailOfflineComponent implements OnInit {
     '后轴承加速度X方差',
     '后轴承加速度Y方差',
     '后轴承加速度Z方差',
-    '位移X方差',
-    '位移Y方差',
+    '前轴承位移X方差',
+    '前轴承位移Y方差',
     '支座X方差',
     '支座Y方差',
     '支座Z方差',
@@ -197,10 +197,13 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
+            data:[1,2,3,4,5],
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'mm/min',
             type: 'value'
           },
           series: [
@@ -253,10 +256,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'m/s',
             type: 'value'
           },
           series: [
@@ -293,10 +298,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'r/min',
             type: 'value'
           },
           series: [
@@ -334,10 +341,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'mm',
             type: 'value'
           },
           series: [
@@ -374,10 +383,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'μm',
             type: 'value'
           },
           series: [
@@ -414,10 +425,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'μm',
             type: 'value'
           },
           series: [
@@ -454,10 +467,12 @@ export class DetailOfflineComponent implements OnInit {
             }
           },
           xAxis: {
+            name:'编号#',
             type: 'category',
             boundaryGap: false,
           },
           yAxis: {
+            name:'μm',
             type: 'value'
           },
           series: [
@@ -526,8 +541,8 @@ export class DetailOfflineComponent implements OnInit {
     {name: '后轴承加速度X', disabled: false},
     {name: '后轴承加速度Y', disabled: false},
     {name: '后轴承加速度Z', disabled: false},
-    {name: '位移X', disabled: false},
-    {name: '位移Y', disabled: false},
+    {name: '前轴承位移X', disabled: false},
+    {name: '前轴承位移Y', disabled: false},
     {name: '支座加速度X', disabled: false},
     {name: '支座加速度Y', disabled: false},
     {name: '支座加速度Z', disabled: false},
@@ -557,7 +572,7 @@ export class DetailOfflineComponent implements OnInit {
             this.historyChecked1[i].disabled = false
           }
         }
-      } else if (this.checkHistoryValues1[0].name == '位移X' || this.checkHistoryValues1[0].name == '位移Y') {
+      } else if (this.checkHistoryValues1[0].name == '前轴承位移X' || this.checkHistoryValues1[0].name == '前轴承位移Y') {
         this.option.yAxis.name='m/s'
         for (var i = 0; i < 6; i++) {
           this.historyChecked1[i].disabled = true
