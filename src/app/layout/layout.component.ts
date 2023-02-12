@@ -40,21 +40,21 @@ export class LayoutComponent implements OnInit {
 
   menu = [
     {
-      title: '生产线列表',
+      title: '在线监测',
       children: [
         { title: '', link: '' },
       ]
     },
     {
-      title: '配置',
+      title: '在线配置',
       children: [
-        { title: '装备配置', link: '/config/equipment' },
+        { title: '设备配置', link: '/config/equipment' },
       ]
     },
     {
       title: '数据分析',
       children: [
-        {title: '数据诊断',link: '/data/diagnose'},
+        {title: '离线诊断',link: '/data/diagnose'},
 
       ]
     }

@@ -17,15 +17,21 @@
     </d-checkbox-group>
 
     <div class="original">
-      <div class="OriginalWaveform" style="width:100%;height:100%;margin:auto;padding: 20px"></div>
+      <div class="OriginalWaveform" style="width:100%;height:100%;margin:auto;padding: 20px">
+        <h1>原始波形</h1>
+      </div>
     </div>
 
     <div class="frequency-spectrum">
-      <div class="Spectrogram" style="width:100%;height:100%;margin:auto;padding: 5px"></div>
+      <div class="Spectrogram" style="width:100%;height:100%;margin:auto;padding: 5px">
+        <h1>频谱图</h1>
+      </div>
     </div>
 
     <div class="time-frequency">
-      <div id="TimeFrequencyDiagram" style="width:100%;height:100%;margin:auto;padding: 20px"></div>
+      <div id="TimeFrequencyDiagram" style="width:100%;height:100%;margin:auto;padding: 20px">
+        <h1>时频图</h1>
+      </div>
     </div>
 
 
@@ -174,8 +180,8 @@
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>环境：{{R12[0].toFixed(2)}}°C</p>
+    <br>
     <p>目标：{{R12[1].toFixed(2)}}°C</p>
-    <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -186,8 +192,8 @@
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
     <p>环境：{{R13[0].toFixed(2)}}°C</p>
+    <br>
     <p>目标：{{R13[1].toFixed(2)}}°C</p>
-    <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
 
@@ -197,8 +203,7 @@
       <d-card-title>前轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>目标：{{R14[0].toFixed(2)}}°C</p>
-<!--    <p>峰值：{{R14[1]}}</p>-->
+    <p style="margin-bottom: 3em;">目标：{{R14[0].toFixed(2)}}°C</p>
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->
   </d-card>
@@ -209,7 +214,7 @@
       <d-card-title>后轴承外圈温度</d-card-title>
       <!-- <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle> -->
     </d-card-header>
-    <p>目标：{{R15[0].toFixed(2)}}°C</p>
+    <p style="margin-bottom: 3em;">目标：{{R15[0].toFixed(2)}}°C</p>
 <!--    <p>峰值：{{R15[1]}}</p>-->
     <p></p>
     <!-- <div style="height:20px;width:20px;background-color:blue"></div> -->

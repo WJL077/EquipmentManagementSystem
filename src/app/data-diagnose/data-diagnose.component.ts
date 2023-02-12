@@ -84,7 +84,7 @@ export class DataDiagnoseComponent implements OnInit {
     //     break;
     // }
   }
-  options = ['X方向震动','Y方向震动','声音','X方向震动+Y方向震动','X方向震动+声音','Y方向震动+声音','X方向震动+Y方向震动+声音'];
+  options = ['X方向振动','Y方向振动','声音','X方向振动+Y方向振动','X方向振动+声音','Y方向振动+声音','X方向振动+Y方向振动+声音'];
   constructor() { }
 
   //离线诊断

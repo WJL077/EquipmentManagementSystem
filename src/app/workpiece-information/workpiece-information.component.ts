@@ -38,10 +38,10 @@ export class WorkpieceInformationComponent implements OnInit {
     },
     toolbox: {
       feature: {
-        dataZoom: {
-          yAxisIndex: 'none'
-        },
-        restore: {},
+        // dataZoom: {
+        //   yAxisIndex: 'none'
+        // },
+        // restore: {},
         saveAsImage: {}
       }
     },
@@ -93,10 +93,10 @@ export class WorkpieceInformationComponent implements OnInit {
     },
     toolbox: {
       feature: {
-        dataZoom: {
-          yAxisIndex: 'none'
-        },
-        restore: {},
+        // dataZoom: {
+        //   yAxisIndex: 'none'
+        // },
+        // restore: {},
         saveAsImage: {}
       }
     },
@@ -139,6 +139,71 @@ export class WorkpieceInformationComponent implements OnInit {
     ]
   };
 
+  //时频图
+  tf = {
+    tooltip: {},
+    title: {
+      text: '时频图',
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      name: '时间s',
+      type: 'category',
+      // data: ['A', 'B', 'C']
+    },
+    yAxis: {
+      name: '频率Hz',
+      type: 'category',
+      // data: ['1', '2', '3']
+    },
+    visualMap: {
+      itemWidth: 10,
+      align: 'left',
+      min: 0,
+      max: 4,
+      calculable: true,
+      inRange: {
+        color: [
+          '#313695',
+          '#4575b4',
+          '#74add1',
+          '#abd9e9',
+          '#e0f3f8',
+          '#ffffbf',
+          '#fee090',
+          '#fdae61',
+          '#f46d43',
+          '#d73027',
+          '#a50026'
+        ]
+      }
+    },
+    dataZoom: [{
+      type: 'slider',
+      start: 0,
+      end: 50,
+      xAxisIndex: [0],
+      handleSize: 40,
+      height:'30px'
+    },
+      {
+        type: 'slider',
+        start: 0,
+        end: 50,
+        yAxisIndex: [0],
+        handleSize: 40,
+        height: '75%',
+      }],
+    series: [{
+      type: 'heatmap',
+      data: []
+    }]
+  };
+
   checkBoxValues1 = [];
 
   onCheckbox1Change(value: any) {
@@ -155,6 +220,23 @@ export class WorkpieceInformationComponent implements OnInit {
     var LineChart2 = echart.init(chart2[0] as HTMLDivElement)
     LineChart2.clear()
     LineChart2.setOption(this.fft)
+
+    this.tf.series[0].data=[]
+    //初始化时频图
+    var chart = document.getElementById('TimeFrequencyDiagram')
+    var hotChart = echart.init(chart as HTMLDivElement)
+    hotChart.setOption(this.tf)
+
+    if (this.checkBoxValues1[0] == '前轴承位移X' || this.checkBoxValues1[0] == '前轴承位移Y') {
+      this.signal.yAxis.name = 'm/s'
+      this.fft.yAxis.name = 'm/s'
+    } else if (this.checkBoxValues1[0] == '') {
+      this.signal.yAxis.name = ''
+      this.fft.yAxis.name = ''
+    } else {
+      this.signal.yAxis.name = 'm/s²'
+      this.fft.yAxis.name = 'm/s²'
+    }
 
     for(var i=0;i<this.checkBoxValues1.length;i++){
       this.http.get("/api/history/bearings/" + this.workpieceName + "/" + this.checkBoxValues1[i]).subscribe((res: any) => {
@@ -190,52 +272,8 @@ export class WorkpieceInformationComponent implements OnInit {
         LineChart2.setOption(this.fft)
 
         //时频图
-        var data = res.data.stft.stft
-        var chart = document.getElementById('TimeFrequencyDiagram')
-        var hotChart = echart.init(chart as HTMLDivElement)
-        var option = {
-          tooltip: {},
-          title: {
-            text: '时频图',
-          },
-          xAxis: {
-            name:'时间s',
-            type: 'category',
-            // data: ['A', 'B', 'C']
-          },
-          yAxis: {
-            name:'频率Hz',
-            type: 'category',
-            // data: ['1', '2', '3']
-          },
-          visualMap: {
-            itemWidth:10,
-            align:'left',
-            min: 0,
-            max: 4,
-            calculable: true,
-            inRange: {
-              color: [
-                '#313695',
-                '#4575b4',
-                '#74add1',
-                '#abd9e9',
-                '#e0f3f8',
-                '#ffffbf',
-                '#fee090',
-                '#fdae61',
-                '#f46d43',
-                '#d73027',
-                '#a50026'
-              ]
-            }
-          },
-          series: [{
-            type: 'heatmap',
-            data: data
-          }]
-        };
-        hotChart.setOption(option)
+        this.tf.series[0].data=res.data.stft.stft
+        hotChart.setOption(this.tf)
 
 
       })
